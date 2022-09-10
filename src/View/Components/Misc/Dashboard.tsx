@@ -1,0 +1,21 @@
+import { Container } from "@mui/material"
+import { KeyInfoCard } from "../KeyInfo/KeyInfoCard"
+import { ContentButtonBox } from "./ContentButtonBox"
+import { ContentContainer } from "./ContentContainer"
+
+export const Dashboard = () => {
+
+    return (
+        <Container sx={{
+            mt: 3,
+            display: "grid",
+            gridGap: 5,
+            gridTemplateColumns: "max-content auto",
+            gridTemplateRows: "auto auto",
+        }}>
+            <KeyInfoCard sx={{gridColumn: 1, gridRow: 1}} />
+            <ContentButtonBox sx={{gridColumn: 1, gridRow: 2}} />
+            <ContentContainer sx={{gridColumn: 2, gridRow: "1 / 3", pl: 2}} />
+        </Container>
+    )
+}
