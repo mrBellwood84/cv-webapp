@@ -3,7 +3,7 @@ import { Fragment } from "react"
 import { useTranslation } from "react-i18next"
 import { IExperience } from "../../../Core/Data/IExperience"
 import { ISchool } from "../../../Core/Data/ISchool"
-import { OtherEducItem } from "./OtherEducItem"
+import { ExperienceItem } from "../Misc/ExperienceItem"
 import { SchoolItem } from "./SchoolItem"
 
 export const EducationContainer = () => {
@@ -155,7 +155,7 @@ export const EducationContainer = () => {
 
                 <Stack spacing={3} sx={{mt: 2, mb: 1, width: "max-content"}}>
                     {otherEduc.map(x => (
-                        <OtherEducItem key={x.id} item={x} />
+                        <ExperienceItem key={x.id} item={x} />
                     ))}
                 </Stack>
 

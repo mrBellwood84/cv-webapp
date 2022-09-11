@@ -7,9 +7,10 @@
     "selectLanguage": "Velg Språk",
     "skills": "Ferdigheter",
     "signout" : "Logg ut",
-
     "school" : "Skole",
     "course" : "Kurs",
     "certifications": "Sertifikasjoner",
-    "other": "Annet"
+    "other": "Annet",
+    "workExperience" : "Arbeidserfaring",
+    "reference" : "Referanser"
 }

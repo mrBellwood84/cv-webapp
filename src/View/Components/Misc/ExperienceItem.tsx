@@ -7,26 +7,26 @@ interface IProps {
     item: IExperience
 }
 
-export const OtherEducItem = ({item}: IProps) => {
+export const ExperienceItem = ({item}: IProps) => {
 
     const lang = useAppSelector((state) => state.utils.language)
 
     return (
         <Box sx={{display: "flex", flexDirection: "column"}}>
 
-            <Box sx={{display: "flex", flexDirection:"row", alignItems: "baseline"}}>
+            <Box sx={{display: "flex", flexDirection:"row", alignItems: "center"}}>
                 <Typography variant="h6" component="div">
                     {item.header.find(x => x.code === lang)?.content}
                 </Typography>
                 {item.startDate && (
-                    <Typography variant="overline" component="div" sx={{ml: "auto",pl: 2}}>
-                        {createYearMonthSpan(lang, item.startDate, item.endDate, true)}
+                    <Typography variant="body2" component="div" sx={{ml: "auto", pl: 4, fontWeight: 500}}>
+                        {createYearMonthSpan(lang, item.startDate, item.endDate, true).toUpperCase()}
                     </Typography>
                 )}
             </Box>
 
             {item.subheader && (
-                <Typography variant="subtitle2" component="div">
+                <Typography variant="body1" component="div" sx={{fontWeight: 500}}>
                     {item.subheader.find(x => x.code === lang)?.content}
                 </Typography>
             )}

@@ -1,12 +1,233 @@
+import { Stack, Typography } from "@mui/material"
 import { Fragment } from "react"
+import { useTranslation } from "react-i18next"
+import { IEmployment } from "../../../Core/Data/IEmployment"
+import { IExperience } from "../../../Core/Data/IExperience"
+import { ExperienceItem } from "../Misc/ExperienceItem"
+import { EmploymentItem } from "./EmploymentItem"
 
 export const ExperienceContainer = () => {
+
+    const { t } = useTranslation()
+
+    const employment: IEmployment[] = [
+        {
+            id: "empl1",
+            employer: "Rema 1000",
+            startDate: new Date(2005, 7),
+            positions: [
+                {
+                    id: "pos1",
+                    type: "employmentData",
+                    startDate: new Date(2005, 7),
+                    endDate: new Date(2010, 5),
+                    header: [
+                        {
+                            id: "lang1",
+                            code:"no",
+                            content:"Ryddegutt",
+                        },
+                        {
+                            id: "lang2",
+                            code: "en",
+                            content: "Cleaningboy"
+                        }
+                    ],
+                    text: [
+                        {
+                            id: "lang3",
+                            code: "no",
+                            content: "Rydding og vasking i butikk, putte varer i hyller",
+                        },
+                        {
+                            id: "lang4",
+                            code: "en",
+                            content: "Cleaning and maintaining the store, restocking shelfs"
+                        }
+                    ],
+                },
+                {
+                    id: "pos2",
+                    type: "employmentData",
+                    startDate: new Date(2010, 5),
+                    endDate: new Date(2016, 8),
+                    header: [
+                        {
+                            id: "lang5",
+                            code: "no",
+                            content: "Butikkmedarbeider"
+                        },
+                        {
+                            id: "lang6",
+                            code: "en",
+                            content: "Shop Assistand"
+                        }
+                    ],
+                    text: [
+                        {
+                            id: "lang7",
+                            code: "no",
+                            content: "Full butikkmedarbeider med ansvar for kasse og bestilling",
+                        },
+                        {
+                            id: "lang8",
+                            code: "en",
+                            content: "Full-time shop employee with responsibility for checkout and ordering",
+
+                        }
+                    ]
+                },
+                {
+                    id: "pos3",
+                    type: "employmentData",
+                    startDate: new Date(2016, 8),
+                    header: [
+                        {
+                            id: "lang9",
+                            code: "no",
+                            content: "Butikksjef",
+                        },
+                        {
+                            id: "lang10",
+                            code: "en",
+                            content: "Store Manager",
+                        }
+                    ],
+                    text: [
+                        {
+                            id: "lang11",
+                            code: "no",
+                            content: "Personell og økonomisk ansvar",
+                        },
+                        {
+                            id: "lang12",
+                            code: "en",
+                            content: "Personnel and financial responsibility",
+                        }
+                    ]
+                }
+            ],
+            reference: [
+                {
+                    id: "ref1",
+                    name: "Skinke-Hitler",
+                    role: [
+                        {
+                            id: "lang1",
+                            code: "no",
+                            content: "Konsernsjef"
+                        },
+                        {
+                            id: "lang2",
+                            code: "en",
+                            content: "CEO"
+                        }
+                    ],
+                    phonenumber: "+47 55 56 57 58",
+                    email: "hamhitler@mail.com",
+                },
+                {
+                    id: "ref2",
+                    name: "Kåre Kassemann",
+                    role: [
+                        {
+                            id: "lang3",
+                            code: "no",
+                            content: "Skiftleder"
+                        },
+                        {
+                            id: "lang4",
+                            code: "en",
+                            content: "Shift Manager"
+                        }
+                    ],
+                    phonenumber: "+47 97 55 00 55",
+                    email: "kaare.k.hansen@email.com",
+
+                }
+            ]
+        }
+    ]
+
+    const otherExperiences: IExperience[] = [
+        {
+            id: "exp",
+            type: "expericence",
+            startDate: new Date(2010, 5),
+            header: [
+                {
+                    id: "lang10",
+                    code: "no",
+                    content: "Sture og Snørrnesene"
+                },
+                {
+                    id: "lang11",
+                    code: "en",
+                    content: "Sture & the Snotnoses"
+                }
+            ],
+            subheader: [
+                {
+                    id: "lang12",
+                    code: "no",
+                    content: "Gitarist i rockeband"
+                },
+                {
+                    id: "lang13",
+                    code: "en",
+                    content: "Guitarist in a rockband"
+                }
+            ],
+            text: [
+                {
+                    id: "lang14",
+                    code: "no",
+                    content: "Skrev halvparten av låtene, men drakk all pilsen",
+                },
+                {
+                    id: "lang15",
+                    code: "en",
+                    content: "Wrote half of the songs, but drank all the beer",
+                }
+            ]
+        }
+    ]
+
     return (
         <Fragment>
-            <h3>Work Experience</h3>
-            <p>This page should contain work experience items like expected in a cv</p>
-            <p>The items may also contain additional information about the work experience</p>
-            <p>Items should also contain reference if any</p>
+            {employment && (employment.length > 0) && (
+                <Fragment>
+                    <Typography variant="h5" component="div" sx={{borderBottom: "1px solid lightgrey"}}>
+                        {t("workExperience")}
+                    </Typography>
+
+                    <Stack spacing={3} sx={{mt: 2, mb: 1, width: "max-content", minWidth: "50%"}}>
+                        {employment.sort((a,b) => {
+                            if (a.startDate > b.startDate) return -1;
+                            else return 1
+                        })
+                            .map(x => (
+                            <EmploymentItem key={x.id} item={x} />
+                        ))}
+                    </Stack>
+                </Fragment>
+            )}
+
+            {otherExperiences && (otherExperiences.length > 0) && (
+                <Fragment>
+                    <Typography variant="h5" component="div" sx={{borderBottom: "1px solid lightgrey"}}>
+                        {t("other")}
+                    </Typography>
+
+                    <Stack spacing={3} sx={{mt: 2, mb: 1, width: "max-content", minWidth: "50%"}}>
+                        {otherExperiences.map(x => (
+                            <ExperienceItem key={x.id} item={x} />
+                        ))}
+                    </Stack>
+
+                </Fragment>
+            )}
+
         </Fragment>
     )
 }
