@@ -85,6 +85,7 @@ export const EducationContainer = () => {
 
     const otherEduc: IExperience[] = [
         {
+            id: "educ1",
             type: "otherEduc",
             startDate: new Date(2004, 5),
             header: [
@@ -154,7 +155,7 @@ export const EducationContainer = () => {
 
                 <Stack spacing={3} sx={{mt: 2, mb: 1, width: "max-content"}}>
                     {otherEduc.map(x => (
-                        <OtherEducItem item={x} />
+                        <OtherEducItem key={x.id} item={x} />
                     ))}
                 </Stack>
 
