@@ -13,6 +13,7 @@ export const LanguageDialog = () => {
     const handleClose = () => dispath(utilStore.actions.setShowLanguageDialog(false))
     const changeLanguage = (code: string) => {
         i18n.changeLanguage(code)
+        dispath(utilStore.actions.setLanguage(code))
         handleClose()
     }
 

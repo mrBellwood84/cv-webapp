@@ -22,7 +22,7 @@ i18n.use(Backend)
     .init({
         fallbackLng: "no",
         supportedLngs: supportedLanguages.map(x => x.code),
-        debug: true,
+        debug: false,
         interpolation: {
             escapeValue: false,
         }
