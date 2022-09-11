@@ -4,8 +4,7 @@ export interface IExperience {
     type: string;
     startDate?: Date;
     endDate?: Date;
-    header: ILanguage;
-    subheader: ILanguage;
-    text: ILanguage;
-    comment: ILanguage;
+    header: ILanguage[];
+    subheader?: ILanguage[];
+    text?: ILanguage[];
 }
