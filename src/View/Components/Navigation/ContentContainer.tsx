@@ -12,7 +12,7 @@ interface IProps {
 
 export const ContentContainer = ({sx}: IProps) => {
 
-    const activeView = useAppSelector((state) => state.navigation.activeView)
+    const activeView = useAppSelector((state) => state.utils.activeView)
 
     switch(activeView) {
         case "education":

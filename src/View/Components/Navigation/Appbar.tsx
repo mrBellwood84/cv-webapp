@@ -3,9 +3,14 @@ import AppBar from "@mui/material/AppBar"
 import Button from "@mui/material/Button"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
+import { useTranslation } from "react-i18next"
+import { LanguageButton } from "../Misc/LanguageButton"
 
 
 export const Appbar = () => {
+
+    const { t } = useTranslation();
+
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
@@ -13,8 +18,8 @@ export const Appbar = () => {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         DEV :: Logo
                     </Typography>
-                    <Button color="inherit">DEV :: Language</Button>
-                    <Button color="inherit">DEV :: Logout</Button>
+                    <LanguageButton />
+                    <Button color="inherit"> {t("signout")} </Button>
                 </Toolbar>
             </AppBar>
         </Box>

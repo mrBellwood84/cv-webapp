@@ -1,7 +1,7 @@
 import { Container } from "@mui/material"
 import { KeyInfoCard } from "../KeyInfo/KeyInfoCard"
-import { ContentButtonBox } from "./ContentButtonBox"
-import { ContentContainer } from "./ContentContainer"
+import { ContentButtonBox } from "../Navigation/ContentButtonBox"
+import { ContentContainer } from "../Navigation/ContentContainer"
 
 export const Dashboard = () => {
 

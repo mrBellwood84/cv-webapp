@@ -1,10 +1,7 @@
 import { Typography } from "@mui/material"
 import { Fragment } from "react"
-import { ISchool } from "../../../Core/Data/ISchool"
 
 export const EducationContainer = () => {
-
-    const schools: ISchool[] = []
 
     return <Fragment>
         <h3>Education</h3>

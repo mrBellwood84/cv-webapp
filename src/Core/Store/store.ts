@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { accountStore } from "./Stores/accountStore";
-import { navigationStore } from "./Stores/navigation";
+import { utilStore } from "./Stores/utils";
 
 const store = configureStore({
     reducer: {
         account: accountStore.reducer,
-        navigation: navigationStore.reducer,
+        utils: utilStore.reducer,
     }
 })
 
