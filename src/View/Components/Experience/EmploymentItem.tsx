@@ -28,8 +28,7 @@ export const EmploymentItem = ({item}: IProps) => {
             {item.positions.sort((a,b) => {
                 if (a.startDate! > b.startDate!) return -1
                 else return 1
-            })
-                .map(x => (
+            }).map(x => (
                 <Box key={x.id} sx={{mb: 1}} >
                     <Box sx={{display: "flex", flexDirection: "row", alignItems: "center"}}>
                         <Typography variant="body1" component="div" sx={{fontWeight: 500}}>
