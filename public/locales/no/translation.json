@@ -12,5 +12,14 @@
     "certifications": "Sertifikasjoner",
     "other": "Annet",
     "workExperience" : "Arbeidserfaring",
-    "reference" : "Referanser"
+    "reference" : "Referanser",
+
+    "programmingLanguages": "Programmeringsspråk",
+    "frameworks": "Rammeverk",
+    "ratingExplained" : "Forklaring...",
+    "rate1" : "Interessert",
+    "rate2" : "Noob",
+    "rate3" : "Sånn passe",
+    "rate4" : "Passe sheriff",
+    "rate5" : "Ingen er helt ekspert"
 }
