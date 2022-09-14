@@ -37,8 +37,9 @@ export const EducationContainer = () => {
                     content: "Sports line",
                 }
             ],
-            start: new Date("2000-08-01"),
-            end: new Date(2003, 5),
+            startDate: new Date("2000-08-01"),
+            endDate: new Date(2003, 5),
+            text: []
         },
         {
             id: "sch2",
@@ -66,8 +67,8 @@ export const EducationContainer = () => {
                     content: "Archeology and History",
                 }
             ],
-            start: new Date(2005, 7),
-            end: new Date(2008, 5),
+            startDate: new Date(2005, 7),
+            endDate: new Date(2008, 5),
             text: [
                 {
                     id: "lang14",
@@ -132,7 +133,7 @@ export const EducationContainer = () => {
             {school && (school.length > 0) && (
                 <SectionStack title={t("school")}>
                     {school.sort((a,b) => {
-                        if (a.start > b.start) return -1;
+                        if (a.startDate > b.startDate) return -1;
                         else return 1
                     }).map(x => (
                         <SchoolItem key={x.id} item={x} />

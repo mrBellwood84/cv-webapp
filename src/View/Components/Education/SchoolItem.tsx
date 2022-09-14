@@ -19,7 +19,7 @@ export const SchoolItem = ({item}: IProps) => {
                     {item.schoolName.find(x => x.code === lang)?.content}
                 </Typography>
                 <Typography variant="body2" component="div" sx={{ml: "auto", pl: 4, fontWeight: 500}}>
-                    {createYearMonthSpan(lang, item.start, item.end).toUpperCase()}
+                    {createYearMonthSpan(lang, item.startDate, item.endDate).toUpperCase()}
                 </Typography>
             </Box>
 

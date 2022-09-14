@@ -107,7 +107,7 @@ export const ExperienceContainer = () => {
                     ]
                 }
             ],
-            reference: [
+            references: [
                 {
                     id: "ref1",
                     name: "Skinke-Hitler",

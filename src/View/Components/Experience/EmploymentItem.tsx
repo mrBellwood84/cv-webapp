@@ -48,7 +48,7 @@ export const EmploymentItem = ({item}: IProps) => {
                     {t("reference")}
                 </Typography>
 
-                {item.reference.map(x => (
+                {item.references.map(x => (
                     <Box key={x.id} sx={{width: "max-content", minWidth: "50%"}}>
                         <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", mt:1}}>
                             <Typography variant="body2" component="div" sx={{fontWeight: 500}}>
