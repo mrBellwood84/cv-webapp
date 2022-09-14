@@ -1,4 +1,4 @@
-import { Box, Link, ListItemSecondaryAction, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Link, Stack, Tooltip, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { IProject } from "../../../Core/Data/IProject"
 import { useAppSelector } from "../../../Core/Store/hooks";
@@ -21,12 +21,12 @@ export const PortfolioItem = ({item}: IProps) => {
                 <Stack direction="row" spacing={1} sx={{ml: "auto"}}>
                     {item.languages && (item.languages.length > 0) && item.languages.map(x =>
                         <Tooltip title={x.name}>
-                            <img src={x.svgUrl} height="30px" />
+                            <img src={x.svgUrl} height="30px" alt={`logo ${x.name}`} />
                         </Tooltip>
                     )}
                     {item.frameworks && (item.frameworks.length > 0) && item.frameworks.map(x => 
                         <Tooltip title={x.name}>
-                            <img src={x.svgUrl} height="30px" />
+                            <img src={x.svgUrl} height="30px" alt={`logo ${x.name}`} />
                         </Tooltip>
                     )}
                 </Stack>
