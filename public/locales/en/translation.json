@@ -12,5 +12,12 @@
     "certifications": "Certifications",
     "other": "Other",
     "workExperience" : "Work Experience",
-    "reference" : "References"
+    "reference" : "References",
+    "programmingLanguages": "Programming Languages",
+    "frameworks": "Frameworks",
+    "rate1" : "n00b",
+    "rate2" : "Not completely n00b",
+    "rate3" : "Not to shabby",
+    "rate4" : "Skilled Code Ninja",
+    "rate5" : "..."
 }

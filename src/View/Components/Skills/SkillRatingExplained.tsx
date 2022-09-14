@@ -19,7 +19,6 @@ const RateBox = ({value, i18nKey}: IRateBoxProps) => {
                 <Typography variant="caption" component="div" sx={{ml: 1}}>
                     {t(i18nKey)}
                 </Typography>
-
         </Box>
     )
 }
@@ -27,8 +26,8 @@ const RateBox = ({value, i18nKey}: IRateBoxProps) => {
 export const SkillRatingExplained = () => {
 
     return (
-        <Box sx={{display:"flex", justifyContent: "center", mt: 4}}>
-            <Stack spacing={0.5} sx={{mt: 2}}>
+        <Box sx={{display:"flex", justifyContent: "center", mt: 2}}>
+            <Stack spacing={0.5}>
                 <RateBox value={5} i18nKey="rate5" />
                 <RateBox value={4} i18nKey="rate4" />
                 <RateBox value={3} i18nKey="rate3" />

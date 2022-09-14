@@ -1,9 +1,9 @@
-import { Stack, Typography } from "@mui/material"
 import { Fragment } from "react"
 import { useTranslation } from "react-i18next"
 import { IEmployment } from "../../../Core/Data/IEmployment"
 import { IExperience } from "../../../Core/Data/IExperience"
 import { ExperienceItem } from "../Misc/ExperienceItem"
+import { SectionStack } from "../_Shared/SectionStack"
 import { EmploymentItem } from "./EmploymentItem"
 
 export const ExperienceContainer = () => {
@@ -195,37 +195,24 @@ export const ExperienceContainer = () => {
 
     return (
         <Fragment>
-            {employment && (employment.length > 0) && (
-                <Fragment>
-                    <Typography variant="h5" component="div" sx={{borderBottom: "1px solid lightgrey"}}>
-                        {t("workExperience")}
-                    </Typography>
 
-                    <Stack spacing={3} sx={{mt: 2, mb: 1, width: "max-content", minWidth: "50%"}}>
-                        {employment.sort((a,b) => {
-                            if (a.startDate > b.startDate) return -1;
-                            else return 1
-                        })
-                            .map(x => (
-                            <EmploymentItem key={x.id} item={x} />
-                        ))}
-                    </Stack>
-                </Fragment>
+            {employment && (employment.length > 0) && (
+                <SectionStack title={t("workExperience")}>
+                    {employment.sort((a,b) => {
+                        if (a.startDate > b.startDate) return -1;
+                        else return 1;
+                    }).map(x => (
+                        <EmploymentItem key={x.id} item={x} />
+                    ))}
+                </SectionStack>
             )}
 
             {otherExperiences && (otherExperiences.length > 0) && (
-                <Fragment>
-                    <Typography variant="h5" component="div" sx={{borderBottom: "1px solid lightgrey"}}>
-                        {t("other")}
-                    </Typography>
-
-                    <Stack spacing={3} sx={{mt: 2, mb: 1, width: "max-content", minWidth: "50%"}}>
-                        {otherExperiences.map(x => (
-                            <ExperienceItem key={x.id} item={x} />
-                        ))}
-                    </Stack>
-
-                </Fragment>
+                <SectionStack title={t("other")}>
+                    {otherExperiences.map(x => (
+                        <ExperienceItem key={x.id} item={x} />
+                    ))}
+                </SectionStack>
             )}
 
         </Fragment>

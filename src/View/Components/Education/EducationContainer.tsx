@@ -1,9 +1,9 @@
-import { Stack, Typography } from "@mui/material"
 import { Fragment } from "react"
 import { useTranslation } from "react-i18next"
 import { IExperience } from "../../../Core/Data/IExperience"
 import { ISchool } from "../../../Core/Data/ISchool"
 import { ExperienceItem } from "../Misc/ExperienceItem"
+import { SectionStack } from "../_Shared/SectionStack"
 import { SchoolItem } from "./SchoolItem"
 
 export const EducationContainer = () => {
@@ -127,41 +127,26 @@ export const EducationContainer = () => {
         }
     ]
 
-    return <Fragment>
-
-        {school && school.length > 0 && (
-            <Fragment>
-                <Typography variant="h5" component="header" sx={{borderBottom: "1px solid lightgrey"}}>
-                    {t("school")}
-                </Typography>
-                
-                <Stack spacing={3} sx={{mt:2, mb:1, width: "max-content"}}>
-                    {school
-                        .sort((a,b) => {
-                        if (a.start > b.start) return -1
+    return (
+        <Fragment>
+            {school && (school.length > 0) && (
+                <SectionStack title={t("school")}>
+                    {school.sort((a,b) => {
+                        if (a.start > b.start) return -1;
                         else return 1
-                        }).map(x => (
-                            <SchoolItem key={x.id} item={x} />
+                    }).map(x => (
+                        <SchoolItem key={x.id} item={x} />
                     ))}
-                </Stack>
-            </Fragment>
-        )}
+                </SectionStack>
+            )}
 
-        {otherEduc && (otherEduc.length > 0) && (
-            <Fragment>
-                <Typography variant="h5" component="div" sx={{borderBottom: "1px solid lightgrey", mt:4}}>
-                    {t("course")} / {t("certifications")} / {t("other")}
-                </Typography>
-
-                <Stack spacing={3} sx={{mt: 2, mb: 1, width: "max-content"}}>
+            {otherEduc && (otherEduc.length > 0) && (
+                <SectionStack title={`${t("course")} / ${t("certifications")} / ${t("other")}`}>
                     {otherEduc.map(x => (
                         <ExperienceItem key={x.id} item={x} />
                     ))}
-                </Stack>
-
-            </Fragment>
-        )}
-
-    </Fragment>
-
+                </SectionStack>
+            )}
+        </Fragment>
+    )
 }

@@ -12,7 +12,7 @@ export const Appbar = () => {
     const { t } = useTranslation();
 
     return (
-        <Box sx={{flexGrow: 1}}>
+        <Box>
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>

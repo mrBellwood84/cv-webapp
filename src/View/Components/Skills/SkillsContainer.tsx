@@ -1,8 +1,8 @@
-import { Divider, Typography } from "@mui/material"
-import { Stack } from "@mui/system"
+import { Divider } from "@mui/material"
 import { Fragment } from "react"
 import { useTranslation } from "react-i18next"
 import { ISkill } from "../../../Core/Data/ISkill"
+import { SectionStack } from "../_Shared/SectionStack"
 import { SkillItem } from "./SkillItem"
 import { SkillRatingExplained } from "./SkillRatingExplained"
 
@@ -35,7 +35,7 @@ export const SkillsContainer = () => {
             type: "language",
             name: "JavaScript",
             svgUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-            rating: 4,
+            rating: 3,
             text: [
                 {
                     id: "lang3",
@@ -95,38 +95,28 @@ export const SkillsContainer = () => {
     return (
         <Fragment>
             {programming && (programming.length > 1 && (
-                <Fragment>
-                    <Typography variant="h5" component="div" sx={{borderBottom: "2px solid lightgrey"}}>
-                        {t("programmingLanguages")}
-                    </Typography>
-
-                    <Stack 
-                    spacing={2} 
-                    sx={{mt: 2, mb: 2, width: "max-content", minWidth: "100%"}} 
-                    divider={<Divider flexItem orientation="horizontal"/>} >
-                        {programming.map(x => (
-                            <SkillItem key={x.id} item={x} />
-                        ))}
-                    </Stack>
-                </Fragment>
+                <SectionStack title={t("programmingLanguages")}>
+                    {programming.sort((a,b) => {
+                        if (a.rating > b.rating) return -1;
+                        else return 1
+                    }).map(x => (
+                        <SkillItem key={x.id} item={x} />
+                    ))}
+                </SectionStack>
             ))}
 
             {frameworks && (frameworks.length > 1 && (
-                <Fragment>
-                    <Typography variant="h5" component="div" sx={{borderBottom: "2px solid lightgrey"}}>
-                        {t("frameworks")}
-                    </Typography>
-
-                    <Stack 
-                        spacing={2} 
-                        sx={{mt: 2, mb: 1, width: "max-content", minWidth: "100%"}} 
-                        divider={<Divider flexItem orientation="horizontal" />}>
-                        {frameworks.map(x => (
-                            <SkillItem key={x.id} item={x} />
-                        ))}
-                    </Stack>
-                </Fragment>
+                <SectionStack title={t("frameworks")}>
+                    {frameworks.sort((a,b) => {
+                        if (a.rating > b.rating) return -1;
+                        else return 1
+                    }).map(x => (
+                        <SkillItem key={x.id} item={x} />
+                    ))}
+                </SectionStack>
             ))}
+
+            <Divider sx={{mt:2 }} />
 
             <SkillRatingExplained />
 

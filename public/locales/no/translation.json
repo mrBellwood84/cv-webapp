@@ -13,13 +13,11 @@
     "other": "Annet",
     "workExperience" : "Arbeidserfaring",
     "reference" : "Referanser",
-
     "programmingLanguages": "Programmeringsspråk",
     "frameworks": "Rammeverk",
-    "ratingExplained" : "Forklaring...",
-    "rate1" : "Interessert",
-    "rate2" : "Noob",
-    "rate3" : "Sånn passe",
+    "rate1" : "n00b",
+    "rate2" : "Ikke helt n00b",
+    "rate3" : "Ikke sånn halvgæern",
     "rate4" : "Passe sheriff",
-    "rate5" : "Ingen er helt ekspert"
+    "rate5" : "..."
 }
