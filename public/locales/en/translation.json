@@ -20,7 +20,12 @@
     "rate3" : "Not to shabby",
     "rate4" : "Skilled Code Ninja",
     "rate5" : "...",
-
-    "webpage": "Webpage"
-
+    "webpage": "Webpage",
+    "userName" : "Username",
+    "userNameRequired" : "Username required!",
+    "password" : "Password",
+    "passwordRequired" : "Password required!",
+    "signIn" : "Sign In",
+    "signinCredentialError" : "Wrong username or password!",
+    "accountExpired" : "Account has expired!"
 }

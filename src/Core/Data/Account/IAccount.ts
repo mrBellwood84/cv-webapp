@@ -1,11 +1,11 @@
-
 /** model for account data */
 export interface IAccount {
-    id: string;
+    id?: string;
     firstName: string;
     lastName: string;
     username: string;
     company?: string;
-    email: string;
     role: string;
+    email: string;
+    accountExpire: Date;
 }

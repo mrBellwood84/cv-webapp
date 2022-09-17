@@ -20,6 +20,12 @@
     "rate3" : "Ikke sånn halvgæern",
     "rate4" : "Passe sheriff",
     "rate5" : "...",
-
-    "webpage": "Nettside"
+    "webpage": "Nettside",
+    "userName" : "Brukernavn",
+    "userNameRequired" : "Brukernavn påkrevd!",
+    "password" : "Passord",
+    "passwordRequired" : "Passord påkrevd!",
+    "signIn" : "Logg Inn",
+    "signinCredentialError" : "Feil brukernavn eller passord",
+    "accountExpired" : "Kontoen har utløpt"
 }

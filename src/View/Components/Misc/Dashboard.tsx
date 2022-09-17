@@ -1,5 +1,5 @@
 import { Container } from "@mui/material"
-import { KeyInfoCard } from "../KeyInfo/KeyInfoCard"
+import { KeyInfoCard } from "./KeyInfoCard"
 import { ContentButtonBox } from "../Navigation/ContentButtonBox"
 import { ContentContainer } from "../Navigation/ContentContainer"
 
