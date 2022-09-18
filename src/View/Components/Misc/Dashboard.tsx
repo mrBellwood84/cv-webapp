@@ -11,11 +11,11 @@ export const Dashboard = () => {
             display: "grid",
             gridGap: 5,
             gridTemplateColumns: "max-content auto",
-            gridTemplateRows: "auto auto",
+            gridTemplateRows: "max-content max-content auto",
         }}>
             <KeyInfoCard sx={{gridColumn: 1, gridRow: 1}} />
             <ContentButtonBox sx={{gridColumn: 1, gridRow: 2}} />
-            <ContentContainer sx={{gridColumn: 2, gridRow: "1 / 3", pl: 2}} />
+            <ContentContainer sx={{gridColumn: 2, gridRow: "1 / 4", pl: 2}} />
         </Container>
     )
 }

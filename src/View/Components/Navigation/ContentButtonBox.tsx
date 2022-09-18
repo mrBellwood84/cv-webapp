@@ -1,17 +1,19 @@
 import { Box, Divider, List, SxProps, Theme } from "@mui/material"
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../../Core/Store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks";
 import { utilStore } from "../../../Core/Store/Stores/utils";
 import { ContentButton } from "./ContentButton";
 import {
     DataObject,
     FolderShared,
     Home,
+    ManageAccounts,
     PictureAsPdf,
     School,
     Work,
 
 } from "@mui/icons-material"
+import { Fragment } from "react";
 
 interface IProps {
     sx?: SxProps<Theme>;
@@ -20,7 +22,9 @@ interface IProps {
 export const ContentButtonBox = ({sx}: IProps) => {
 
     const dispatch = useAppDispatch();
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+
+    const isAdmin = useAppSelector((state) => state.account.account?.role) === "admin";
 
     const btnClick = (key: string) => {
         dispatch(utilStore.actions.setActiveView(key));
@@ -29,6 +33,12 @@ export const ContentButtonBox = ({sx}: IProps) => {
     return (
         <Box sx={{...sx, width: "100%", maxWidth: 360, bgcolor: ""}}>
             <List>
+                {isAdmin && (
+                    <Fragment>
+                        <ContentButton text={t("manageUsers")} svg={ManageAccounts} onClick={() => btnClick("manageUsers")} />
+                        <Divider />
+                    </Fragment>
+                )}
                 <ContentButton text={t("home")} svg={Home} onClick={() => btnClick("")} />
                 <ContentButton text={t("education")} svg={School} onClick={() => btnClick("education")} />
                 <ContentButton text={t("experience")} svg={Work} onClick={() => btnClick("experience")} />

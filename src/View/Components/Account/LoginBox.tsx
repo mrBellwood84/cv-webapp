@@ -39,6 +39,7 @@ export const LoginBox = ({sx}:IProps) => {
         if (typeof(response) === "number") {
             if (response === 401) setSignInError("signinCredentialError");
             if (response === 400) setSignInError("accountExpired");
+            if (response === 500) setSignInError("serverError");
             setApiLoading(false);
             return;
         }

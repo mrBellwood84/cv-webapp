@@ -1,6 +1,5 @@
 /** model for account data */
 export interface IAccount {
-    id?: string;
     firstName: string;
     lastName: string;
     username: string;
