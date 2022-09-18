@@ -7,7 +7,7 @@ import { CreateEditUserForm } from "./CreateEditUserForm"
 export const EditUserContainer = () => {
 
     const { t } = useTranslation();
-    const selectedUser = useAppSelector((state) => state.admin.selectedUser)
+    const selectedUser = useAppSelector((state) => state.admin.selectedUser);
 
     return (
         <Fragment>

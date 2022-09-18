@@ -2,10 +2,9 @@ import { Box, Typography } from "@mui/material";
 
 interface IProps {
     text: string;
-    subfield?: JSX.Element
 }
 
-export const SectionHeader = ({text, subfield}: IProps) => {
+export const SectionHeader = ({text}: IProps) => {
 
     return (
     <Box 
@@ -20,7 +19,6 @@ export const SectionHeader = ({text, subfield}: IProps) => {
             {text}
         </Typography>
 
-        {subfield}
 
 
     </Box>

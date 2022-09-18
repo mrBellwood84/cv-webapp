@@ -28,7 +28,6 @@
     "signIn" : "Sign In",
     "signinCredentialError" : "Wrong username or password!",
     "accountExpired" : "Account has expired!",
-
     "manageUsers" : "Manage Users",
     "expire" : "Expires",
     "expired" : "Expired",
@@ -54,6 +53,7 @@
     "no" : "No",
     "pdfExported": "PDF exported",
     "search" : "Search",
+    "sort" : "Sort",
     "userSearchHelperText" : "Search full name or username",
     "createUserFailed" : "Something went wrong with creating new user...",
     "editUserFailed" : "Something went wrong with editing user...",
@@ -62,5 +62,11 @@
     "deleteDialog" : "Delete",
     "deleteText" : "Are you sure you want to delete",
     "cancel" : "Cancel",
-    "ok" : "Ok"
+    "ok" : "Ok",
+
+    "sortByName" : "'Name'",
+    "sortByUserName" : "Username",
+    "sortByExpire" : "Expiration",
+    "sortByCompany" : "Company",
+    "sortByLogins" : "Log-ins"
 }

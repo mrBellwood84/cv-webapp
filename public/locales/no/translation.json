@@ -28,7 +28,6 @@
     "signIn" : "Logg Inn",
     "signinCredentialError" : "Feil brukernavn eller passord",
     "accountExpired" : "Kontoen har utløpt",
-
     "manageUsers" : "Administrer brukere",
     "expire" : "Utløper",
     "expired" : "Utløp",
@@ -54,7 +53,7 @@
     "no" : "Nei",
     "pdfExported": "Eksportert PDF",
     "search" : "Søk",
-    "userSearchHelperText" : "Søk navn eller brukernavn",
+    "sort" : "Sorter",
     "createUserFailed" : "Noe gikk galt med opprettelsen av ny bruker...",
     "editUserFailed" : "Noe gikk galt med redigering av bruker...",
     "deleteUserFailed" : "Kunne ikke slette bruker...",
@@ -62,6 +61,11 @@
     "deleteDialog" : "Slett",
     "deleteText" : "Er du sikker på du vil slette",
     "cancel" : "Avbryt",
-    "ok" : "Ok"
+    "ok" : "Ok",
+    "sortByName" : "Navn",
+    "sortByUserName" : "Brukernavn",
+    "sortByExpire" : "Utløpsdato",
+    "sortByCompany" : "Selskap",
+    "sortByLogins" : "Innlogginger"
 
 }

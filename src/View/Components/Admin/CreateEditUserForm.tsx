@@ -60,6 +60,11 @@ export const CreateEditUserForm = () => {
 
     const passwordExist = Boolean(watch("password"))
 
+    const resolveUniqueUsername = (username: string) => {
+        if (edit) return true;
+        return !usernames.includes(username)
+    }
+
     const changed = edit && (
         (watch("firstName")) !== selectedUser?.firstName ||
         (watch("lastName")) !== selectedUser?.lastName ||
@@ -191,7 +196,8 @@ export const CreateEditUserForm = () => {
                 {...register("userName", {
                     required: "userNameRequired",
                     validate: {
-                        unique: v => !usernames.includes(v.toLowerCase()) || "usernameExistError"
+                        unique: v => resolveUniqueUsername(v) || "usernameExistError"
+                        // unique: v => (!usernames.includes(v.toLowerCase()) && edit) || "usernameExistError"
                     }
                 })}
                 disabled={edit}
@@ -282,7 +288,7 @@ export const CreateEditUserForm = () => {
             {registerError && (
                 <Typography 
                     sx={{
-                        gridRow: 6, gridColumn: "1 / 3",
+                        gridRow: 8, gridColumn: "1 / 3",
                         color: "darkred",
                         fontWeight: 600,
                     }}
@@ -293,6 +299,8 @@ export const CreateEditUserForm = () => {
 
             <Button 
                 sx={{gridColumn: "1 / 3", gridRow: 7}}
+                variant="contained"
+                color="success"
                 type="submit"
                 disabled={!changed && edit && (confirmPasswordChange ? !confirmPasswordChange : true)}
             >
@@ -300,7 +308,7 @@ export const CreateEditUserForm = () => {
             </Button>
  
             {edit && passwordExist && (
-                <FormGroup sx={{gridColumn: "1 / 3", gridRow: 8}}>
+                <FormGroup sx={{gridColumn: "1 / 3", gridRow: 6}}>
                     <FormControlLabel
                         label={t("confirmNewPassword")}
                         control={<Checkbox 

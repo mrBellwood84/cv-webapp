@@ -15,9 +15,11 @@ export const ManageUserItem = ({user}: IProps) => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch()
 
-    const dateNow = new Date()
+    let dateNow = new Date()
+    dateNow.setDate(new Date().getDate() - 1)
     const dateExpired = new Date(user.accountExpire.split("T")[0])
     const expired = dateExpired < dateNow;
+    console.log(dateNow, dateExpired, expired)
 
     const setEditUser = () => {
         dispatch(adminStore.actions.setSelectedUser(user));

@@ -5,14 +5,13 @@ import { SectionHeader } from "./SectionHeader";
 interface IProps {
     children: ReactNode;
     title: string
-    subfield?: JSX.Element
 }
 
-export const SectionStack = ({children, title, subfield}: IProps) => {
+export const SectionStack = ({children, title, }: IProps) => {
 
     return (
         <Fragment>
-            <SectionHeader text={title} subfield={subfield}/>
+            <SectionHeader text={title}/>
             <Stack spacing={2}
                 sx={{
                     width: "100%",
