@@ -63,10 +63,12 @@
     "deleteText" : "Are you sure you want to delete",
     "cancel" : "Cancel",
     "ok" : "Ok",
-
     "sortByName" : "'Name'",
     "sortByUserName" : "Username",
     "sortByExpire" : "Expiration",
     "sortByCompany" : "Company",
-    "sortByLogins" : "Log-ins"
+    "sortByLogins" : "Log-ins",
+    "addEducation" : "Add education",
+    "noEducation" : "No education added...."
+
 }

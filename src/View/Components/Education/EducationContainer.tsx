@@ -1,7 +1,10 @@
+import { AddCircle } from "@mui/icons-material"
+import { Box, IconButton, Tooltip, Typography } from "@mui/material"
 import { Fragment } from "react"
 import { useTranslation } from "react-i18next"
-import { IExperience } from "../../../Core/Data/IExperience"
-import { ISchool } from "../../../Core/Data/ISchool"
+import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
+import { educationStore } from "../../../Core/Store/Stores/education"
+import { utilStore } from "../../../Core/Store/Stores/utils"
 import { ExperienceItem } from "../Misc/ExperienceItem"
 import { SectionStack } from "../_Shared/SectionStack"
 import { SchoolItem } from "./SchoolItem"
@@ -9,128 +12,38 @@ import { SchoolItem } from "./SchoolItem"
 export const EducationContainer = () => {
 
     const { t } = useTranslation()
+    const dispatch = useAppDispatch()
 
-    const school: ISchool[] = [
-        {
-            id: "sch1",
-            schoolName: [
-                {
-                    id: "lang1",
-                    code: "no",
-                    content: "Bergen Videregående Skole"
-                },
-                {
-                    id: "lang2",
-                    code: "en",
-                    content: "Bergen High School"
-                },
-            ],
-            courseName: [
-                {
-                    id: "lang3",
-                    code: "no",
-                    content: "Idrettslinja"
-                },
-                {
-                    id: "lang4",
-                    code: "en",
-                    content: "Sports line",
-                }
-            ],
-            startDate: new Date("2000-08-01"),
-            endDate: new Date(2003, 5),
-            text: []
-        },
-        {
-            id: "sch2",
-            schoolName: [
-                {
-                    id: "lang10",
-                    code: "no",
-                    content: "Universitetet i Bergen",
-                },
-                {
-                    id: "lang11",
-                    code: "en",
-                    content: "Bergen University",
-                }
-            ],
-            courseName: [
-                {
-                    id: "lang12",
-                    code: "no",
-                    content: "Arkeologi og Historie",
-                },
-                {
-                    id: "lang13",
-                    code: "en",
-                    content: "Archeology and History",
-                }
-            ],
-            startDate: new Date(2005, 7),
-            endDate: new Date(2008, 5),
-            text: [
-                {
-                    id: "lang14",
-                    code: "no",
-                    content: "Uferdig bachelor i arkeologi og årstudium i historie",
-                },
-                {
-                    id:"lang15",
-                    code: "en",
-                    content: "Unfinished bachelor in archeology and year study in history",
-                }
-            ]
-        }
-    ]
+    const school = useAppSelector((state) => state.education.schools);
+    const otherEduc = useAppSelector((state) => state.education.others)
+    const role = useAppSelector((state) => state.account.account?.role)
 
-    const otherEduc: IExperience[] = [
-        {
-            id: "educ1",
-            type: "otherEduc",
-            startDate: new Date(2004, 5),
-            header: [
-                {
-                    id: "lang1",
-                    code: "no",
-                    content: "Førerkort"
-                },
-                {
-                    id: "lang2",
-                    code: "en",
-                    content: "Driver Licence"
-                }
-            ],
-            subheader: [
-                {
-                    id: "lang3",
-                    code: "no",
-                    content: "Klasse B"
-                },
-                {
-                    id: "lang4",
-                    code: "en",
-                    content: "Class B"
-                }
-            ],
-            text: [
-                {
-                    id: "lang4",
-                    code: "no",
-                    content: "Jeg liker ikke å kjøre bil..."
-                },
-                {
-                    id: "lang5",
-                    code: "en",
-                    content: "I do not enjoy driving..."
-                }
-            ]
-        }
-    ]
+    const handleAddEducation = () => {
+        dispatch(educationStore.actions.removeSelected());
+        dispatch(utilStore.actions.setActiveView("addEducation"));
+    }
 
     return (
+
         <Fragment>
-            {school && (school.length > 0) && (
+
+            {role && (role === "admin") && (
+                <Box sx={{display: "flex", justifyContent: "right"}}>
+                    <Tooltip title={t("addEducation")}>
+                        <IconButton onClick={handleAddEducation}>
+                            <AddCircle fontSize="large" color="primary"/>
+                        </IconButton>
+                    </Tooltip>
+                </Box>
+            )}
+
+            {school.length === 0 && otherEduc.length === 0 && (
+                <Typography variant="h6" component="div">
+                    {t("noEducation")}
+                </Typography>
+            )}
+
+            {school.length > 0 && (
                 <SectionStack title={t("school")}>
                     {school.sort((a,b) => {
                         if (a.startDate > b.startDate) return -1;

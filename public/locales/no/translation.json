@@ -66,6 +66,9 @@
     "sortByUserName" : "Brukernavn",
     "sortByExpire" : "Utløpsdato",
     "sortByCompany" : "Selskap",
-    "sortByLogins" : "Innlogginger"
+    "sortByLogins" : "Innlogginger",
+    
+    "addEducation" : "Legg til utdanning",
+    "noEducation" : "Ingen utdannelse lagt til..."
 
 }
