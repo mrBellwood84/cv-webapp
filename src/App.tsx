@@ -4,7 +4,7 @@ import { IAccount } from "./Core/Data/Account/IAccount";
 import { useAppDispatch, useAppSelector } from "./Core/Store/hooks";
 import { accountStore } from "./Core/Store/Stores/accountStore";
 import { utilStore } from "./Core/Store/Stores/utils";
-import { tokenStorage } from "./Core/Utils/storageTools";
+import { cookeHandler } from "./Core/Utils/cookieHandler";
 import i18n from "./i18n";
 import { MainNoUser } from "./View/MainNoUser";
 import { MainUser } from "./View/MainUser";
@@ -15,7 +15,6 @@ const App = () => {
 
     const account = useAppSelector((state) => state.account.account);
 
-
     useEffect(() => {
 
         const setLanguageInState = () => {
@@ -25,13 +24,13 @@ const App = () => {
 
         const getCurrentUser = async () => {
             
-            let tokenExist = Boolean(tokenStorage.get(false))
+            let tokenExist = Boolean(cookeHandler.token())
             if (!tokenExist) return;
 
             let response = await accountAgent.getCurrent();
 
             if (typeof(response) === "number") {
-                tokenStorage.remove()
+                cookeHandler.remove()
                 return
             }
 

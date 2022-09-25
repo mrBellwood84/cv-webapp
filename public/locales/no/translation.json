@@ -82,6 +82,9 @@
     "endDateRequired" : "Sluttdato påkrevd...",
     "text" : "Tekst",
     "translationMissing": "Oversettelse mangler",
-    "edit" : "Rediger"
+    "edit" : "Rediger",
+
+    "sessionExpire" : "Økten utløper om",
+    "minutes" : "minutter"
 
 }

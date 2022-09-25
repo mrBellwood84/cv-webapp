@@ -1,5 +1,5 @@
 import { appConfig } from "../../appConfig";
-import { tokenStorage } from "../Utils/storageTools";
+import { cookeHandler } from "../Utils/cookieHandler";
 
 export const _rootAgent  ={
     get: async (subdomain: string) => {
@@ -8,7 +8,7 @@ export const _rootAgent  ={
             method: "GET",
             mode: "cors",
             headers: {
-                Authorization: tokenStorage.get()
+                Authorization: cookeHandler.token()
             },
         })
         return response;
@@ -20,7 +20,7 @@ export const _rootAgent  ={
             mode: "cors",
             headers: {
                 "Content-Type" : "application/json",
-                Authorization: tokenStorage.get()
+                Authorization: cookeHandler.token()
             },
             body: JSON.stringify(body),
         })
@@ -33,7 +33,7 @@ export const _rootAgent  ={
             mode: "cors",
             headers: {
                 "Content-Type" : "application/json",
-                Authorization: tokenStorage.get()
+                Authorization: cookeHandler.token()
             },
             body: JSON.stringify(body),
         })
@@ -46,7 +46,7 @@ export const _rootAgent  ={
             mode: "cors",
             headers: {
                 "Content-Type" : "application/json",
-                Authorization: tokenStorage.get()
+                Authorization: cookeHandler.token()
             },
             body: JSON.stringify(body),
         })

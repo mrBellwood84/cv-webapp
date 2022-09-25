@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { accountAgent } from "../../../Core/ApiAgent/accountAgent";
 import { IAccount } from "../../../Core/Data/Account/IAccount";
 import { accountStore } from "../../../Core/Store/Stores/accountStore";
-import { tokenStorage } from "../../../Core/Utils/storageTools";
+import { cookeHandler } from "../../../Core/Utils/cookieHandler";
 import { LoadingBox } from "../Misc/LoadingBox";
 
 interface IProps {
@@ -44,7 +44,7 @@ export const LoginBox = ({sx}:IProps) => {
             return;
         }
 
-        tokenStorage.set(response.token!)
+        cookeHandler.set(response.token!, response.role)
 
         const account: IAccount = {
             firstName: response.firstName,
@@ -95,6 +95,7 @@ export const LoginBox = ({sx}:IProps) => {
                 type="text"
                 autoFocus
                 autoCorrect="off"
+                autoComplete="off"
                 label={t("userName")}
                 {...register("userName", {
                     required: "userNameRequired"
@@ -110,6 +111,7 @@ export const LoginBox = ({sx}:IProps) => {
                 variant="standard"
                 type= {showPassword ? "text" : "password"}
                 autoCorrect="off"
+                autoComplete="off"
                 label={t("password")}
                 {...register("password", {
                     required: "passwordRequired"
