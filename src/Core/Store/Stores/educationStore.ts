@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IExperience } from "../../Data/IExperience";
-import { ISchool } from "../../Data/ISchool";
+import { ISchool } from "../../Data/School/ISchool";
 
 interface IEducationState {
     schools: ISchool[];
@@ -24,7 +24,8 @@ export const educationStore = createSlice({
 
         addSchool: (state, action: PayloadAction<ISchool>) => {
             let copy = [...state.schools];
-            copy.push(action.payload)
+            const school = action.payload;
+            copy.push(school)
             state.schools = copy
         },
 
@@ -73,7 +74,7 @@ export const educationStore = createSlice({
         },
 
         removeSelected: (state) => {
-            state.selectedExperience = undefined;
+            state.selectedSchool = undefined;
             state.selectedExperience = undefined;
         }
 

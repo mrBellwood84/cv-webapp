@@ -20,7 +20,7 @@ export const ExperienceItem = ({item}: IProps) => {
                 </Typography>
                 {item.startDate && (
                     <Typography variant="body2" component="div" sx={{ml: "auto", pl: 4, fontWeight: 500}}>
-                        {createYearMonthSpan(lang, item.startDate, item.endDate, true).toUpperCase()}
+                        {createYearMonthSpan(lang, item.startDate.toISOString(), item.endDate?.toISOString(), true).toUpperCase()}
                     </Typography>
                 )}
             </Box>

@@ -8,7 +8,7 @@
     "skills": "Ferdigheter",
     "signout" : "Logg ut",
     "school" : "Skole",
-    "course" : "Kurs",
+    "courses" : "Kurs",
     "certifications": "Sertifikasjoner",
     "other": "Annet",
     "workExperience" : "Arbeidserfaring",
@@ -67,8 +67,21 @@
     "sortByExpire" : "Utløpsdato",
     "sortByCompany" : "Selskap",
     "sortByLogins" : "Innlogginger",
-    
     "addEducation" : "Legg til utdanning",
-    "noEducation" : "Ingen utdannelse lagt til..."
+    "noEducation" : "Ingen utdannelse lagt til...",
+    "course"  : "Kurs",
+    "schoolNameRequired" : "Skolenavn påkrevd",
+    "courseRequired": "Kursnavn påkrevd...",
+    "norwegian" : "Norsk",
+    "english" : "Engelsk",
+    "norwegianTextMissing" : "Norsk tekst mangler...",
+    "englishTextMissing" : "Engelsk tekst mangler...",
+    "startDate" : "Oppstart",
+    "startDateRequired" : "Oppstartsdato påkrevd...",
+    "end" : "Slutt",
+    "endDateRequired" : "Sluttdato påkrevd...",
+    "text" : "Tekst",
+    "translationMissing": "Oversettelse mangler",
+    "edit" : "Rediger"
 
 }

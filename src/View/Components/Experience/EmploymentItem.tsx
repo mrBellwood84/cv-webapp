@@ -21,7 +21,7 @@ export const EmploymentItem = ({item}: IProps) => {
                     {item.employer}
                 </Typography>
                 <Typography variant="body2" component="div" sx={{ml: "auto", pl: 4, fontWeight: 500}}>
-                    {createYearMonthSpan(lang, item.startDate, item.endDate).toUpperCase()}
+                    {createYearMonthSpan(lang, item.startDate.toUTCString(), item.endDate?.toISOString()).toUpperCase()}
                 </Typography>
             </Box>
 

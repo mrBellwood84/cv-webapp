@@ -119,22 +119,25 @@ export const monthNames: IDateLib[] = [
 
 export const createYearMonthSpan = (
     lang:string, 
-    start: Date, 
-    end: Date | undefined = undefined, 
+    start: string, 
+    end: string | undefined = undefined, 
     short: boolean = false
 ): string => {
 
-    if (!i18n.languages.includes(lang)) lang = "en"
+    if (!i18n.languages.includes(lang)) lang = "en";
 
-    let startMonth:string, endMonth: string;
+    const startDateObj = new Date(start);
+    const endDateObj = end ? new Date(end) : undefined;
 
+    let startMonth, endMonth;
+    
     if (short) {
-        startMonth = monthNames.find(x => x.code === lang)!.content[start.getMonth()].short;
-        endMonth   = end ? monthNames.find(x => x.code === lang)!.content[end.getMonth()].short : ""
+        startMonth = monthNames.find(x => x.code === lang)!.content[startDateObj.getMonth()].short;
+        endMonth = end ? monthNames.find(x => x.code === lang)!.content[startDateObj.getMonth()].short : "";
     } else {
-        startMonth = monthNames.find(x => x.code === lang)!.content[start.getMonth()].full;
-        endMonth   = end ? monthNames.find(x => x.code === lang)!.content[end.getMonth()].full : ""
+        startMonth = monthNames.find(x => x.code === lang)!.content[startDateObj.getMonth()].full;
+        endMonth = end ? monthNames.find(x => x.code === lang)!.content[startDateObj.getMonth()].full : "";
     }
 
-    return `${startMonth} ${start.getFullYear()} - ${endMonth} ${end ? end.getFullYear() : ""}`.trimEnd();
+    return `${startMonth} ${startDateObj.getFullYear()} - ${endMonth} ${end ? endDateObj?.getFullYear() : ""}`.trimEnd();
 }

@@ -27,7 +27,7 @@ export const AddEducationContainer = () => {
                     </Tabs>
                 </Box>
                 <Divider />
-                <TabPanel index={0} value={value}>
+                <TabPanel index={0} value={value}> 
                     <AddEditSchoolForm />
                 </TabPanel>
                 <TabPanel index={1} value={value}>

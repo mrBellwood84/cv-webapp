@@ -8,7 +8,7 @@
     "skills": "Skills",
     "signout" : "Sign Out",
     "school" : "School",
-    "course" : "Courses",
+    "courses" : "Courses",
     "certifications": "Certifications",
     "other": "Other",
     "workExperience" : "Work Experience",
@@ -69,6 +69,20 @@
     "sortByCompany" : "Company",
     "sortByLogins" : "Log-ins",
     "addEducation" : "Add education",
-    "noEducation" : "No education added...."
+    "noEducation" : "No education added....",
+    "course"  : "Course",
+    "schoolNameRequired" : "School name required",
+    "courseRequired": "Course name required...",
+    "norwegian" : "Norwegian",
+    "english" : "English",
+    "norwegianTextMissing" : "Norwegian text missing...",
+    "englishTextMissing" : "English text missing...",
+    "startDate" : "Start date",
+    "startDateRequired" : "Start date required...",
+    "end" : "End",
+    "endDateRequired" : "End date required...",
+    "text" : "Text",
+    "translationMissing": "Translation missing...",
+    "edit" : "Edit"
 
 }

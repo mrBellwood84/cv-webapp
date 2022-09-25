@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { accountStore } from "./Stores/accountStore";
 import { adminStore } from "./Stores/adminStore";
-import { educationStore } from "./Stores/education";
+import { educationStore } from "./Stores/educationStore";
 import { utilStore } from "./Stores/utils";
 
 const store = configureStore({

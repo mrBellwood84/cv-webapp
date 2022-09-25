@@ -8,6 +8,7 @@ import { ExperienceContainer } from "../Experience/ExperienceContainer"
 import { ManageUsersContainer } from "../Admin/ManageUsersContainer"
 import { EditUserContainer } from "../Admin/EditUserContainer"
 import { AddEducationContainer } from "../Education/AddEducationContainer"
+import { AddEditSchoolForm } from "../Education/AddEditSchoolForm"
 
 interface IProps {
     sx: SxProps<Theme>
@@ -30,6 +31,16 @@ export const ContentContainer = ({sx}: IProps) => {
             return <Box sx={{...sx}}>
                 {isAdmin ? <AddEducationContainer/> : <HomeContainer />}
             </Box>
+
+        case "editSchool":
+            return <Box sx={{...sx}}>
+                {isAdmin ? <AddEditSchoolForm /> : <HomeContainer />}
+            </Box>
+
+        // case "editOtherEducation":
+        //     return <Box sx={{...sx}}>
+        //         {isAdmin ? <AddEducationContainer/> : <HomeContainer />}
+        //     </Box>
             
         case "experience":
             return (

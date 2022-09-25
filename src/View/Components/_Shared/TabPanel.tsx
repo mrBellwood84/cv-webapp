@@ -10,7 +10,7 @@ interface IProps {
 
 export const TabPanel = ({children, index, value, sx}: IProps) => {
     return (
-        <Box sx={{...sx,}} role="tabpanel" hidden={value !== index}>
+        <Box sx={{...sx, }} role="tabpanel" hidden={value !== index}>
             {children}
         </Box>
     )

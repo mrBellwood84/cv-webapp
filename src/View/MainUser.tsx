@@ -4,6 +4,7 @@ import { Dashboard } from "./Components/Misc/Dashboard"
 import { LanguageDialog } from "./Components/Misc/LanguageDialog"
 
 export const MainUser = () => {
+
    return (
     <Fragment>
         <Appbar />
