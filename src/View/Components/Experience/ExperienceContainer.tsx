@@ -19,8 +19,8 @@ export const ExperienceContainer = () => {
                 {
                     id: "pos1",
                     type: "employmentData",
-                    startDate: new Date(2005, 7),
-                    endDate: new Date(2010, 5),
+                    startDate: new Date(2005, 7).toISOString(),
+                    endDate: new Date(2010, 5).toISOString(),
                     header: [
                         {
                             id: "lang1",
@@ -49,8 +49,8 @@ export const ExperienceContainer = () => {
                 {
                     id: "pos2",
                     type: "employmentData",
-                    startDate: new Date(2010, 5),
-                    endDate: new Date(2016, 8),
+                    startDate: new Date(2010, 5).toISOString(),
+                    endDate: new Date(2016, 8).toISOString(),
                     header: [
                         {
                             id: "lang5",
@@ -80,7 +80,7 @@ export const ExperienceContainer = () => {
                 {
                     id: "pos3",
                     type: "employmentData",
-                    startDate: new Date(2016, 8),
+                    startDate: new Date(2016, 8).toISOString(),
                     header: [
                         {
                             id: "lang9",
@@ -153,7 +153,7 @@ export const ExperienceContainer = () => {
         {
             id: "exp",
             type: "expericence",
-            startDate: new Date(2010, 5),
+            startDate: new Date(2010, 5).toISOString(),
             header: [
                 {
                     id: "lang10",

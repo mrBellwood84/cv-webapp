@@ -83,8 +83,12 @@
     "text" : "Tekst",
     "translationMissing": "Oversettelse mangler",
     "edit" : "Rediger",
-
     "sessionExpire" : "Økten utløper om",
-    "minutes" : "minutter"
+    "minutes" : "minutter",
+    
+    "title" : "Tittel",
+    "titleRequired" : "Tittel påkrevd...",
+    "subtitle" : "Undertittel"
+
 
 }

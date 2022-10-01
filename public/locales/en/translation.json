@@ -85,6 +85,11 @@
     "translationMissing": "Translation missing...",
     "edit" : "Edit",
     "sessionExpire" : "Session expire in",
-    "minutes" : "minutes"
+    "minutes" : "minutes",
+
+    "title" : "Title",
+    "titleRequired" : "Title required...",
+    "subtitle" : "Subtitle"
+
 
 }

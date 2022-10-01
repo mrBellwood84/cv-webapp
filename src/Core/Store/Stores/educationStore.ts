@@ -5,13 +5,13 @@ import { ISchool } from "../../Data/School/ISchool";
 interface IEducationState {
     schools: ISchool[];
     selectedSchool?: ISchool;
-    others: IExperience[];
-    selectedExperience?: IExperience
+    otherEduc: IExperience[];
+    selectedOtherEduc?: IExperience
 }
 
 const initialState: IEducationState = {
     schools: [],
-    others: []
+    otherEduc: []
 }
 
 export const educationStore = createSlice({
@@ -47,35 +47,35 @@ export const educationStore = createSlice({
         },
 
         setOthersList: (state, action: PayloadAction<IExperience[]>) => {
-            state.others = action.payload;
+            state.otherEduc = action.payload;
         },
 
         addOther: (state, action: PayloadAction<IExperience>) => {
-            let copy = [...state.others];
+            let copy = [...state.otherEduc];
             copy.push(action.payload);
-            state.others = copy;
+            state.otherEduc = copy;
         },
 
         updateOther: (state, action: PayloadAction<IExperience>) => {
-            const copy = [...state.others].map(x => {
+            const copy = [...state.otherEduc].map(x => {
                 if (x.id === action.payload.id) return action.payload;
                 return x
             })
-            state.others = copy;
+            state.otherEduc = copy;
         },
 
         removeOther: (state, action: PayloadAction<string>) => {
-            const filtered = [...state.others].filter(x => x.id !== action.payload);
-            state.others = filtered;
+            const filtered = [...state.otherEduc].filter(x => x.id !== action.payload);
+            state.otherEduc = filtered;
         },
 
         setSelectedOther: (state, action: PayloadAction<IExperience>) => {
-            state.selectedExperience = action.payload;
+            state.selectedOtherEduc = action.payload;
         },
 
         removeSelected: (state) => {
             state.selectedSchool = undefined;
-            state.selectedExperience = undefined;
+            state.selectedOtherEduc = undefined;
         }
 
 

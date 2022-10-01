@@ -7,9 +7,9 @@ export interface IExperience {
     /** experience type: education | position | employment   */
     type: string;
     /** start date of experience if any */
-    startDate?: Date;
+    startDate?: string;
     /** end date of experience if any */
-    endDate?: Date;
+    endDate?: string;
     /** header or title */
     header: ITextLocale[];
     /** subheader or subtitle */

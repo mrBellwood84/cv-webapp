@@ -3,7 +3,7 @@ import { Fragment, SyntheticEvent, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SectionHeader } from "../_Shared/SectionHeader"
 import { TabPanel } from "../_Shared/TabPanel"
-import { AddEditOtherEducForm } from "./AddEditOtherEducForm"
+import { AddEditExperienceForm } from "../Experience/AddEditExperienceForm"
 import { AddEditSchoolForm } from "./AddEditSchoolForm"
 
 export const AddEducationContainer = () => {
@@ -31,7 +31,7 @@ export const AddEducationContainer = () => {
                     <AddEditSchoolForm />
                 </TabPanel>
                 <TabPanel index={1} value={value}>
-                    <AddEditOtherEducForm />
+                    <AddEditExperienceForm datatype="expEduc" />
                 </TabPanel>
             </Box>
         </Fragment>

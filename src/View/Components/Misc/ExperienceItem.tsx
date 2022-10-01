@@ -1,7 +1,11 @@
-import { Box, Typography } from "@mui/material"
+import { Edit } from "@mui/icons-material"
+import { Box, IconButton, Tooltip, Typography } from "@mui/material"
+import { useTranslation } from "react-i18next"
 import { IExperience } from "../../../Core/Data/IExperience"
-import { useAppSelector } from "../../../Core/Store/hooks"
-import { createYearMonthSpan } from "../../../Core/Utils/dateTools"
+import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
+import { educationStore } from "../../../Core/Store/Stores/educationStore"
+import { utilStore } from "../../../Core/Store/Stores/utils"
+import { createYearMonthSpan, createYearMonthString } from "../../../Core/Utils/dateTools"
 
 interface IProps {
     item: IExperience
@@ -9,33 +13,90 @@ interface IProps {
 
 export const ExperienceItem = ({item}: IProps) => {
 
-    const lang = useAppSelector((state) => state.utils.language)
+    const { t } = useTranslation();
+    const dispatch = useAppDispatch();
+    const isAdmin = useAppSelector((state) => state.account.account?.role) === "admin";
+    const lang = useAppSelector((state) => state.utils.language);
+
+    const handleEditClick = () => {
+        dispatch(educationStore.actions.setSelectedOther(item))
+        dispatch(utilStore.actions.setActiveView("editExperience"))
+    }
 
     return (
-        <Box sx={{display: "flex", flexDirection: "column"}}>
 
-            <Box sx={{display: "flex", flexDirection:"row", alignItems: "center"}}>
-                <Typography variant="h6" component="div">
-                    {item.header.find(x => x.code === lang)?.content}
-                </Typography>
-                {item.startDate && (
-                    <Typography variant="body2" component="div" sx={{ml: "auto", pl: 4, fontWeight: 500}}>
-                        {createYearMonthSpan(lang, item.startDate.toISOString(), item.endDate?.toISOString(), true).toUpperCase()}
-                    </Typography>
-                )}
-            </Box>
+        <Box
+            sx={{
+                display: "grid",
+                gridTemplateColumns: "auto max-content max-content",
+                gridTemplateRows: "repeat(3, max-content)",
+                width: "100%",
+                alignItems: "center"
+            }}
+        >
+
+            <Typography
+                sx={{gridRow: 1, gridColumn: 1}}
+                variant="h6"
+                component="div"
+            >
+                {item.header.find(x => x.code === lang)?.content}
+            </Typography>
 
             {item.subheader && (
-                <Typography variant="body1" component="div" sx={{fontWeight: 500}}>
+                <Typography
+                    sx={{gridRow: 2, gridColumn: 1}}
+                    variant="subtitle2"
+                    component="div"
+                >
                     {item.subheader.find(x => x.code === lang)?.content}
                 </Typography>
             )}
 
             {item.text && (
-                <Typography variant="body2" component="div">
+                <Typography
+                    sx={{gridRow: 3, gridColumn: "1 / 3"}}
+                    variant="body1"
+                    component="div"
+                >
                     {item.text.find(x => x.code === lang)?.content}
                 </Typography>
             )}
+
+            {item.startDate && !item.endDate && (
+                <Typography
+                    sx={{gridRow: 1, gridColumn: 2}}
+                    variant="subtitle2"
+                    component="div"
+                >
+                    {createYearMonthString(lang, item.startDate)}
+                </Typography>
+            )}
+
+            {item.startDate && item.endDate && (
+                <Typography
+                    sx={{gridRow: 1, gridColumn: 2}}
+                    variant="subtitle2"
+                    component="div"
+                >
+                    {createYearMonthSpan(lang, item.startDate, item.endDate)}
+                </Typography>
+            )}
+
+            {isAdmin && (
+                <Tooltip
+                    sx={{
+                        gridColumn: 3, gridRow: "1 / 4",
+                        ml: 2, p: 2
+                    }}
+                    title={t("edit")}
+                >
+                    <IconButton onClick={handleEditClick}>
+                        <Edit color="primary" />
+                    </IconButton>
+                </Tooltip>
+            )}
+
 
         </Box>
     )

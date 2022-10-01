@@ -141,3 +141,24 @@ export const createYearMonthSpan = (
 
     return `${startMonth} ${startDateObj.getFullYear()} - ${endMonth} ${end ? endDateObj?.getFullYear() : ""}`.trimEnd();
 }
+
+/**
+ * 
+ * @param date - date as iso string
+ */
+export const createYearMonthString = (lang: string, date: string, short: boolean = false) => {
+
+    if (!i18n.languages.includes(lang)) lang = "en";
+
+    const dateObj = new Date(date)
+    let month: string;
+
+    if (short) {
+        month = monthNames.find(x => x.code === lang)!.content[dateObj.getMonth()].short
+    } else {
+        month = monthNames.find(x => x.code === lang)!.content[dateObj.getMonth()].full
+    }
+
+    return `${month} ${dateObj.getFullYear()}`;
+
+}

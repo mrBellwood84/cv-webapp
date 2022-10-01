@@ -10,10 +10,10 @@ import { LoadingBox } from "../Misc/LoadingBox"
 import { FormLanguageToggle } from "../_Shared/FormLanguageToggle"
 import { v4 as guid } from "uuid"
 import { ITextLocale } from "../../../Core/Data/ITextLocale"
-import { educAgent } from "../../../Core/ApiAgent/educAgent"
 import { educationStore } from "../../../Core/Store/Stores/educationStore"
 import { utilStore } from "../../../Core/Store/Stores/utils"
 import { Delete } from "@mui/icons-material"
+import { schoolAgent } from "../../../Core/ApiAgent/schoolAgent"
 
 type SchoolFormData = {
     id: string;
@@ -28,7 +28,7 @@ type SchoolFormData = {
 }
 
 
-const parseSchoolData = (data: ISchool): SchoolFormData => {
+const mapToFormData = (data: ISchool): SchoolFormData => {
     return {
         id: data.id,
         schoolName_NO: findContentByLanguage(data.schoolName, "no"),
@@ -42,7 +42,7 @@ const parseSchoolData = (data: ISchool): SchoolFormData => {
     }
 }
 
-const remapData = (data: SchoolFormData, original: ISchool | undefined): ISchool => {
+const mapToDbData = (data: SchoolFormData, original?: ISchool): ISchool => {
     let schoolData: ISchool = {
         id: original ? original.id : guid(),
         schoolName: [
@@ -116,7 +116,7 @@ export const AddEditSchoolForm = () => {
     const edit = Boolean(selected)
 
     const { register, handleSubmit, watch, setError, formState: {errors} } = useForm<SchoolFormData>({
-        defaultValues: edit ? parseSchoolData(selected!) : undefined,
+        defaultValues: edit ? mapToFormData(selected!) : undefined,
     })
 
     const resolveSchoolNameHelperText = (lang: string): string => {
@@ -207,7 +207,7 @@ export const AddEditSchoolForm = () => {
 
         setApiLoading(true)
 
-        const dto = remapData(data, selected)
+        const dto = mapToDbData(data, selected)
 
         edit ? await updateSchool(dto) : await createSchool(dto)
 
@@ -216,7 +216,7 @@ export const AddEditSchoolForm = () => {
     }
 
     const createSchool = async (data: ISchool) => {
-        var result = await educAgent.postSchool(data);
+        var result = await schoolAgent.postSchool(data);
         if (typeof(result) === "number") {
             console.error("DEV :: something went wrong", result)
             return
@@ -226,7 +226,7 @@ export const AddEditSchoolForm = () => {
     }
 
     const updateSchool = async(data: ISchool) => {
-        const result = await educAgent.updateSchool(data);
+        const result = await schoolAgent.updateSchool(data);
         if (typeof(result) === "number") {
             console.error(result, "DEV :: Updating school item failed")
             return
@@ -237,7 +237,7 @@ export const AddEditSchoolForm = () => {
 
     const deleteSchool = async () => {
         const id = selected ? selected.id : ""
-        const result = await educAgent.deleteSchool(id)
+        const result = await schoolAgent.deleteSchool(id)
         if (result !== 200) {
             console.error(result, "DEV :: Could not delete school item")
             return

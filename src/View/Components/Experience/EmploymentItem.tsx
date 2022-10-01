@@ -35,7 +35,7 @@ export const EmploymentItem = ({item}: IProps) => {
                             {x.header.find(x => x.code === lang)?.content}
                         </Typography>
                         <Typography variant="caption" component="div" sx={{ml: "auto", pl: 4}}>
-                            {x.startDate?.getFullYear()} -{x.endDate && ` ${x.endDate.getFullYear()}`}
+                            {x.startDate}
                         </Typography>
                     </Box>
                     <Typography variant="body2" component="div">
