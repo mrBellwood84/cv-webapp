@@ -71,7 +71,18 @@ const mapToDbData = (data: SchoolFormData, original?: ISchool): ISchool => {
         ],
         startDate: data.start,
         endDate: data.end,
-        text: []
+        text: [
+            {
+                id: original ? findIdByLanguage(original.text, "no") : guid(),
+                code: "no",
+                content: data.text_NO
+            },
+            {
+                id: original ? findIdByLanguage(original.text, "en") : guid(),
+                code: "en",
+                content: data.text_EN
+            }
+        ]
     }
 
     if (Boolean(data.text_NO) && Boolean(data.text_EN)) {

@@ -67,7 +67,7 @@ export const EducationContainer = () => {
         loadData()
 
 
-    }, [dispatch, school.length])
+    }, [dispatch, school.length, otherEduc.length])
 
     if (apiLoading) {
         return <div>API Loading</div>
@@ -95,7 +95,11 @@ export const EducationContainer = () => {
 
             {school.length > 0 && (
                 <SectionStack title={t("school")}>
-                    {school
+                    {[...school]
+                        .sort((a,b) => {
+                            if (a.startDate < b.startDate) return 1
+                            return -1
+                        }) 
                         .map(x => (
                         <SchoolItem key={x.id} item={x} />
                     ))}
@@ -104,7 +108,14 @@ export const EducationContainer = () => {
 
             {otherEduc && (otherEduc.length > 0) && (
                 <SectionStack title={`${t("courses")} / ${t("certifications")} / ${t("other")}`}>
-                    {otherEduc.map(x => (
+                    {[...otherEduc]
+                        .sort((a,b) => {
+                            if (!a.startDate) return 1
+                            if (!b.startDate) return -1
+                            if (a.startDate < b.startDate) return 1
+                            return -1
+                        })
+                        .map(x => (
                         <ExperienceItem key={x.id} item={x} />
                     ))}
                 </SectionStack>

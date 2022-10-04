@@ -59,36 +59,29 @@ const mapToDbData = (dataType: Experience, formData: ExperienceFormData, origina
                 code: "no",
                 content: formData.header_NO
             }
-        ]
-    }
-
-
-    if (formData.subheader_EN && formData.subheader_NO) {
-        data.subheader = [
+        ],
+        subheader: [
             {
                 id: original?.subheader ? findIdByLanguage(original.subheader, "en") : guid(),
                 code: "en",
-                content: formData.subheader_EN
+                content: formData.subheader_EN ? formData.subheader_EN : ""
             },
             {
                 id: original?.subheader ? findIdByLanguage(original.subheader, "no") : guid(),
                 code: "no",
-                content: formData.subheader_NO,
+                content: formData.subheader_NO ? formData.subheader_NO : ""
             }
-        ]
-    }
-
-    if (formData.text_EN && formData.text_NO) {
-        data.text = [
+        ],
+        text: [
             {
                 id: original?.text ? findIdByLanguage(original.text, "en") : guid(),
                 code: "en",
-                content: formData.text_EN
+                content: formData.text_EN ? formData.text_EN : ""
             },
             {
                 id: original?.text ? findIdByLanguage(original.text, "no") : guid(),
                 code: "no",
-                content: formData.text_NO
+                content: formData.text_NO ? formData.text_NO : ""
             }
         ]
     }
@@ -206,9 +199,7 @@ export const AddEditExperienceForm = ({datatype}: IProps) => {
     const resolveLanguageError = (data: ExperienceFormData) => {
         const bothTitle = Boolean(data.header_NO) && Boolean(data.header_EN)
         const bothSubtitle = Boolean(data.subheader_NO) === Boolean(data.subheader_EN)
-        const bothText = Boolean(data.text_NO) === Boolean(data.subheader_EN)
-
-        console.log(bothTitle, bothSubtitle, bothText)
+        const bothText = Boolean(data.text_NO) === Boolean(data.text_EN)
 
         if (bothTitle && bothSubtitle && bothText) return false;
 
@@ -248,7 +239,6 @@ export const AddEditExperienceForm = ({datatype}: IProps) => {
 
 
     const createExperience = async (data: IExperience) => {
-        console.log(data)
         const result = await experienceAgent.postExperience(data);
         if (typeof(result) === "number") {
             console.error(result, "DEV :: something went wrong")
