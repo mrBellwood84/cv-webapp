@@ -1,4 +1,4 @@
-import { IRequestById } from "../Data/IRequestById"
+import { IRequestById } from "../Data/Others/IRequestById"
 import { ISchool } from "../Data/School/ISchool"
 import { _rootAgent } from "./_rootAgent"
 

@@ -1,7 +1,7 @@
 import { Edit } from "@mui/icons-material"
 import { Box, IconButton, Tooltip, Typography } from "@mui/material"
 import { useTranslation } from "react-i18next"
-import { IExperience } from "../../../Core/Data/IExperience"
+import { IExperience } from "../../../Core/Data/Experience/IExperience"
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
 import { educationStore } from "../../../Core/Store/Stores/educationStore"
 import { utilStore } from "../../../Core/Store/Stores/utils"

@@ -1,4 +1,4 @@
-import { ITextLocale } from "../ITextLocale";
+import { ITextLocale } from "../Shared/ITextLocale";
 
 /** model for school / education */
 export interface ISchool {

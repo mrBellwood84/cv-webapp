@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { accountStore } from "./Stores/accountStore";
 import { adminStore } from "./Stores/adminStore";
 import { educationStore } from "./Stores/educationStore";
+import { employmentStore } from "./Stores/employmentStore";
 import { utilStore } from "./Stores/utils";
 
 const store = configureStore({
@@ -9,6 +10,7 @@ const store = configureStore({
         account: accountStore.reducer,
         admin: adminStore.reducer,
         education: educationStore.reducer,
+        employment: employmentStore.reducer,
         utils: utilStore.reducer,
     }
 })

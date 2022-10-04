@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IExperience } from "../../Data/IExperience";
+import { IExperience } from "../../Data/Experience/IExperience";
 import { ISchool } from "../../Data/School/ISchool";
 
 interface IEducationState {
@@ -77,7 +77,5 @@ export const educationStore = createSlice({
             state.selectedSchool = undefined;
             state.selectedOtherEduc = undefined;
         }
-
-
      }
 })

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardMedia, SxProps, Theme, Typography } from "@mui/material"
-import { IApplicant } from "../../../Core/Data/IApplicant";
+import { IApplicant } from "../../../Core/Data/Others/IApplicant";
 import { useAppSelector } from "../../../Core/Store/hooks";
 
 interface IProps {

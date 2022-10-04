@@ -1,4 +1,4 @@
-import { ITextLocale } from "../Data/ITextLocale"
+import { ITextLocale } from "../Data/Shared/ITextLocale"
 
 export const findContentByLanguage = (locale: ITextLocale[] | undefined, code: string ): string => {
     if(!locale) return "";

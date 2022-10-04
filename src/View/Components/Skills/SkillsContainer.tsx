@@ -1,7 +1,7 @@
 import { Divider } from "@mui/material"
 import { Fragment } from "react"
 import { useTranslation } from "react-i18next"
-import { ISkill } from "../../../Core/Data/ISkill"
+import { ISkill } from "../../../Core/Data/Skills/ISkill"
 import { SectionStack } from "../_Shared/SectionStack"
 import { SkillItem } from "./SkillItem"
 import { SkillRatingExplained } from "./SkillRatingExplained"

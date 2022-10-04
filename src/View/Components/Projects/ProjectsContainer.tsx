@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 import { useTranslation } from "react-i18next"
-import { IProject } from "../../../Core/Data/IProject"
+import { IProject } from "../../../Core/Data/Portfolio/IProject"
 import { SectionStack } from "../_Shared/SectionStack"
 import { PortfolioItem } from "./PortfolioItems"
 

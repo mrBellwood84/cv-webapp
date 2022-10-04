@@ -1,7 +1,7 @@
 import { IAccountManaged } from "../Data/Account/IAccountManaged";
 import { ISignInDto } from "../Data/Account/ISignInDto";
 import { ISignInResponse } from "../Data/Account/ISignInResponse";
-import { IRequestById } from "../Data/IRequestById";
+import { IRequestById } from "../Data/Others/IRequestById";
 import { _rootAgent } from "./_rootAgent";
 
 export const accountAgent = {

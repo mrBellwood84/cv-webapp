@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material"
 import { useTranslation } from "react-i18next"
-import { IEmployment } from "../../../Core/Data/IEmployment"
+import { IEmployment } from "../../../Core/Data/Experience/IEmployment"
 import { useAppSelector } from "../../../Core/Store/hooks"
 import { createYearMonthSpan } from "../../../Core/Utils/dateTools"
 

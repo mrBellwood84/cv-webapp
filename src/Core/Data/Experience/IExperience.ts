@@ -1,4 +1,4 @@
-import { ITextLocale } from "./ITextLocale";
+import { ITextLocale } from "../Shared/ITextLocale";
 
 /** Model for experience. Shared by several entities.*/
 export interface IExperience {

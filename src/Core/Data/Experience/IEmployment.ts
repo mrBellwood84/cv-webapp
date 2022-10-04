@@ -1,5 +1,5 @@
+import { IReference } from "../Shared/IReference";
 import { IExperience } from "./IExperience";
-import { IReference } from "./IReference";
 
 /** model for employment data */
 export interface IEmployment {

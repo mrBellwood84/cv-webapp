@@ -1,4 +1,4 @@
-import { IExperience } from "../../../Core/Data/IExperience";
+import { IExperience } from "../../../Core/Data/Experience/IExperience";
 import { findContentByLanguage, findIdByLanguage } from "../../../Core/Utils/languageTools";
 import { v4 as guid } from "uuid"
 import { Fragment, useState } from "react";

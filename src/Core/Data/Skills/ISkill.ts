@@ -1,4 +1,4 @@
-import { ITextLocale } from "./ITextLocale";
+import { ITextLocale } from "../Shared/ITextLocale";
 
 /** model for skills in programming languages or frameworks */
 export interface ISkill {

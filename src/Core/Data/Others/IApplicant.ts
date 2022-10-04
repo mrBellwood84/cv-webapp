@@ -1,4 +1,4 @@
-import { ITextLocale } from "./ITextLocale";
+import { ITextLocale } from "../Shared/ITextLocale";
 
 /** model for applicant data */
 export interface IApplicant {

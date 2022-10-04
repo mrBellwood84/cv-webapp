@@ -1,6 +1,6 @@
 import { Box, Link, Stack, Tooltip, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { IProject } from "../../../Core/Data/IProject"
+import { IProject } from "../../../Core/Data/Portfolio/IProject"
 import { useAppSelector } from "../../../Core/Store/hooks";
 
 interface IProps {

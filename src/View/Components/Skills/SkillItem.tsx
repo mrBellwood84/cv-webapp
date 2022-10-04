@@ -1,6 +1,6 @@
 import { School, SchoolOutlined } from "@mui/icons-material";
 import { Box, Rating, Typography } from "@mui/material";
-import { ISkill } from "../../../Core/Data/ISkill";
+import { ISkill } from "../../../Core/Data/Skills/ISkill";
 import { useAppSelector } from "../../../Core/Store/hooks";
 
 interface IProps {

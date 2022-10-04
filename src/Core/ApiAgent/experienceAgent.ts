@@ -1,5 +1,5 @@
-import { IExperience } from "../Data/IExperience";
-import { IRequestById } from "../Data/IRequestById";
+import { IExperience } from "../Data/Experience/IExperience";
+import { IRequestById } from "../Data/Others/IRequestById";
 import { _rootAgent } from "./_rootAgent";
 
 export const experienceAgent = {
