@@ -61,13 +61,16 @@ export const LoginBox = ({sx}:IProps) => {
     }
 
     if (apiLoading) {
-        return <LoadingBox sx={sx} />
+        return <LoadingBox sx={{
+            gridRow: 3,
+            gridColumn: 2,
+            mt: 5
+        }} />
     }
 
     return (
         <Box 
             sx={{
-                mt: 8,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",

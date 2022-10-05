@@ -88,7 +88,8 @@
     
     "title" : "Tittel",
     "titleRequired" : "Tittel påkrevd...",
-    "subtitle" : "Undertittel"
+    "subtitle" : "Undertittel",
+    "close" : "Lukk"
 
 
 }

@@ -1,6 +1,4 @@
-import { AppBar, Toolbar, Typography } from "@mui/material"
-import { Container } from "@mui/system"
-import { Fragment } from "react"
+import { AppBar, Box, Toolbar, Typography } from "@mui/material"
 import { LoginBox } from "./Components/Account/LoginBox"
 import { LanguageButton } from "./Components/Misc/LanguageButton"
 import { LanguageDialog } from "./Components/Misc/LanguageDialog"
@@ -8,18 +6,29 @@ import { LanguageDialog } from "./Components/Misc/LanguageDialog"
 export const MainNoUser = () => {
 
     return (
-        <Fragment>
-            <AppBar sx={{gridRow:1}} position="static">
+        <Box sx={{
+            minHeight: "100vh",
+            width: "100vw",
+            display: "grid",
+            gridTemplateRows: "max-content 5% max-content auto",
+            gridTemplateColumns: "auto max-content auto"
+        }}>
+            <AppBar sx={{
+                gridRow: "1",
+                gridColumn: "1 / 4",
+                position: "relative"
+
+            }}>
                 <Toolbar>
                     <Typography sx={{flexGrow: 1}}>Dev::test</Typography>
                     <LanguageButton />
-
                 </Toolbar>
             </AppBar>
-            <Container sx={{gridRow:2}} maxWidth="xs">
-                <LoginBox />
-            </Container>
+
+            <LoginBox sx={{gridRow: 3, gridColumn: 2}} />
+
+
             <LanguageDialog />
-        </Fragment>
+        </Box>
     )
 }

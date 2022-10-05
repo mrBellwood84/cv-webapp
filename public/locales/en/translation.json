@@ -89,7 +89,8 @@
 
     "title" : "Title",
     "titleRequired" : "Title required...",
-    "subtitle" : "Subtitle"
+    "subtitle" : "Subtitle",
+    "close": "Close"
 
 
 }
