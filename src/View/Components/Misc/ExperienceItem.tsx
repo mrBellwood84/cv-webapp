@@ -28,76 +28,68 @@ export const ExperienceItem = ({item}: IProps) => {
         <Box
             sx={{
                 display: "grid",
-                gridTemplateColumns: "auto max-content max-content",
+                gridTemplateColumns: "auto auto max-content",
                 gridTemplateRows: "repeat(3, max-content)",
                 width: "100%",
-                alignItems: "center"
             }}
         >
-
-            <Typography
-                sx={{gridRow: 1, gridColumn: 1}}
-                variant="h6"
-                component="div"
-            >
-                {item.header.find(x => x.code === lang)?.content}
+            <Typography variant="subtitle1" component="div"
+                sx={{gridRow: 1, gridColumn: 1, fontWeight: 600}}>
+                    {item.header.find(x => x.code === lang)?.content!}
             </Typography>
 
-            {item.subheader && (
-                <Typography
-                    sx={{gridRow: 2, gridColumn: 1}}
-                    variant="subtitle2"
-                    component="div"
-                >
-                    {item.subheader.find(x => x.code === lang)?.content}
+            {item.subheader.length > 0 && (
+                <Typography variant="subtitle1" component="div"
+                    sx={{gridRow: 2, gridColumn: 1}}>
+                        {item.subheader.find(x => x.code === lang)?.content}
                 </Typography>
             )}
-
-            {item.text && (
-                <Typography
-                    sx={{gridRow: 3, gridColumn: "1 / 3"}}
-                    variant="body1"
-                    component="div"
-                >
-                    {item.text.find(x => x.code === lang)?.content}
+            
+            {item.text.length > 0 && (
+                <Typography variant="body2" component="div"
+                    sx={{gridRow: 3, gridColumn: 1}}>
+                        {item.text.find(x => x.code === lang)?.content}
                 </Typography>
             )}
 
             {item.startDate && !item.endDate && (
                 <Typography
-                    sx={{gridRow: 1, gridColumn: 2}}
-                    variant="subtitle2"
-                    component="div"
-                >
-                    {createYearMonthString(lang, item.startDate)}
+                    sx= {{
+                        gridRow: "1 / 3", gridColumn: 2,
+                        mr: isAdmin ? 2 : 0,
+                        justifySelf: "right", textAlign: "right",
+                    }}
+                    variant="caption"
+                    component="div">
+                        {createYearMonthString(lang, item.startDate)}
                 </Typography>
             )}
 
             {item.startDate && item.endDate && (
                 <Typography
-                    sx={{gridRow: 1, gridColumn: 2}}
-                    variant="subtitle2"
-                    component="div"
-                >
-                    {createYearMonthSpan(lang, item.startDate, item.endDate)}
+                    sx= {{
+                        gridRow: "1 / 3", gridColumn: 2,
+                        mr: isAdmin ? 2 : 0,
+                        justifySelf: "right", textAlign: "right",
+                    }}
+                    variant="caption"
+                    component="div">
+                        {createYearMonthSpan(lang, item.startDate, item.endDate)}
                 </Typography>
             )}
 
             {isAdmin && (
-                <Tooltip
-                    sx={{
-                        gridColumn: 3, gridRow: "1 / 4",
-                        ml: 2, p: 2
-                    }}
-                    title={t("edit")}
-                >
-                    <IconButton onClick={handleEditClick}>
-                        <Edit color="primary" />
-                    </IconButton>
-                </Tooltip>
+                <Box sx={{ 
+                    gridColumn: 3, gridRow: "1 / 4", 
+                    borderLeft: "1px solid lightgrey",
+                    alignSelf:"center" }}>
+                    <Tooltip title={t("edit")} sx={{ml: 1, p: 1 }}>
+                        <IconButton onClick={handleEditClick}>
+                            <Edit color="primary" />
+                        </IconButton>
+                    </Tooltip>
+                </Box>
             )}
-
-
         </Box>
     )
 }

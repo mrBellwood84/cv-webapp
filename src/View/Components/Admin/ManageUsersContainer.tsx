@@ -1,6 +1,6 @@
-import { AddCircle, Search } from "@mui/icons-material";
-import { Box, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Tooltip } from "@mui/material";
-import { ChangeEvent, Fragment, useEffect, useState } from "react";
+import { Add, Search } from "@mui/icons-material";
+import { Box, Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, SxProps, TextField, Typography } from "@mui/material";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next"
 import { accountAgent } from "../../../Core/ApiAgent/accountAgent";
 import { IAccountManaged } from "../../../Core/Data/Account/IAccountManaged";
@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks";
 import { adminStore } from "../../../Core/Store/Stores/adminStore";
 import { utilStore } from "../../../Core/Store/Stores/utils";
 import { LoadingBox } from "../Misc/LoadingBox";
+import { ArrowNavigation } from "../Navigation/ArrowNavigation";
 import { SectionStack } from "../_Shared/SectionStack";
 import { ManageUserItem } from "./ManageUserItem";
 
@@ -67,10 +68,11 @@ const sortUsers = (userList: IAccountManaged[], sortType: string) => {
     }
 }
 
+interface IProps {
+    sx?: SxProps;
+}
 
-
-
-export const ManageUsersContainer = () => {
+export const ManageUsersContainer = ({sx}: IProps) => {
 
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
@@ -132,7 +134,31 @@ export const ManageUsersContainer = () => {
     if (apiLoading) return <LoadingBox />
 
     return (
-        <Fragment>
+        <Box sx={{
+            display: "grid",
+            gridTemplateRows: "repeat(5, max-content)",
+            gridGap: 5,
+            ...sx,
+        }} >
+
+            <Box sx={{
+                gridRow: 1,
+                display: "flex",
+                justifyContent: "space-between",
+            }}>
+                <ArrowNavigation prevPage="home" sx={{gridRow: 1}} />
+                <Button onClick={createUser} startIcon={<Add />} >
+                    {t("createUser")}
+                </Button>
+            </Box>
+
+            <Typography
+                sx={{gridRow: 2}}
+                variant="h4" component="div">
+                    {t("manageUsers")}
+            </Typography>
+
+
             <Box sx={{
                 width:"100%",
                 display: "flex",
@@ -175,20 +201,15 @@ export const ManageUsersContainer = () => {
                     }}
 
                 />
-                <Tooltip title={t("createUser")}>
-                    <IconButton onClick={createUser} sx={{ml:1}}>
-                        <AddCircle color="primary" fontSize="large" />
-                    </IconButton>
-                </Tooltip>
             </Box>
 
-            <SectionStack title={t("manageUsers")} >
+            <SectionStack sx={{gridRow: 4}}  >
                 {searchedUsers.length > 0 && (
                     searchedUsers.map(x => (
                         <ManageUserItem key={x.id} user={x} />
                     ))
                 )}
-            </SectionStack>
-        </Fragment>
+            </SectionStack> 
+        </Box>
     )
 }

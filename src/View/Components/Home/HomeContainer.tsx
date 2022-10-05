@@ -1,7 +1,31 @@
-export const HomeContainer = () => {
-    return <div>
-        <h3>Home container</h3>
-        <p>This container should wish the user welcome by name</p>
-        <p>This page should also containe the application letter for an employee</p>
-    </div>
+import { SxProps, Typography } from "@mui/material"
+import { Box } from "@mui/system"
+import { ArrowNavigation } from "../Navigation/ArrowNavigation"
+
+interface IProps {
+    sx: SxProps
+}
+
+export const HomeContainer = ({sx}: IProps) => {
+    return (
+        <Box sx={{
+            display: "grid",
+            gridTemplateRows: "repeat(5, max-content)",
+            gridGap: 5,
+            ...sx,
+        }}>
+            <Box>
+                any top stuff here
+            </Box>
+            <Typography variant="h6" component="div">
+                Header text
+            </Typography>
+
+            <Box>
+                Content goes here
+            </Box>
+
+            <ArrowNavigation nextPage="education"/>
+        </Box>
+    )
 }

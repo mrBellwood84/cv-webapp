@@ -85,11 +85,11 @@
     "edit" : "Rediger",
     "sessionExpire" : "Økten utløper om",
     "minutes" : "minutter",
-    
     "title" : "Tittel",
     "titleRequired" : "Tittel påkrevd...",
     "subtitle" : "Undertittel",
-    "close" : "Lukk"
-
-
+    "close" : "Lukk",
+    "editSchool" : "Rediger Skole",
+    "editOtherEducation" : "Rediger annen utdanning",
+    "editOtherExperience" : "Rediger annen erfaring"
 }

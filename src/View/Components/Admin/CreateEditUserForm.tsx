@@ -1,6 +1,6 @@
 import { Delete, Password } from "@mui/icons-material";
-import { Box, Button, Checkbox, FormControlLabel, FormGroup, IconButton, TextField, Tooltip, Typography } from "@mui/material"
-import { Fragment, useState } from "react";
+import { Box, Button, Checkbox, FormControlLabel, FormGroup, IconButton, SxProps, TextField, Tooltip, Typography } from "@mui/material"
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { accountAgent } from "../../../Core/ApiAgent/accountAgent";
@@ -9,9 +9,15 @@ import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
 import { adminStore } from "../../../Core/Store/Stores/adminStore";
 import { utilStore } from "../../../Core/Store/Stores/utils";
 import { LoadingBox } from "../Misc/LoadingBox";
+import { ArrowNavigation } from "../Navigation/ArrowNavigation";
+import { SectionHeader } from "../_Shared/SectionHeader";
 import { DeleteDialog } from "./DeleteDialog";
 
-export const CreateEditUserForm = () => {
+interface IProps {
+    sx?: SxProps;
+}
+
+export const CreateEditUserForm = ({sx}: IProps) => {
 
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
@@ -122,203 +128,210 @@ export const CreateEditUserForm = () => {
     if (apiLoading) return <LoadingBox />
 
     return (
-        <Box
-            sx={{
-                mt: 2, ml: 2, mr: 2,
-                display: "grid",
-                gridTemplateRows: "repeat(8, max-content)",
-                gridTemplateColumns: "1fr 1fr max-content",
-                gridGap: "10px",
-                alignItems: "center"
-            }} 
-            component="form"
-            autoComplete="off"
-            onSubmit={handleSubmit(submit)}
-        >
+        <Box sx={{
+            display: "grid",
+            gridTemplateRows: "repeat(4, max-content)",
+            ...sx,
+        }}>
+
             <DeleteDialog 
                 isOpen={deleteDialogOpen}
                 handleClose={() => setDeleteDialogOpen(false)}
                 contentText={`${t("deleteText")} ${selectedUser ? selectedUser.userName : ""}?`}
                 handleDelete={() => deleteUser()} />
 
-
-            {edit && (
-                <Fragment>
-                    <Box sx={{gridColumn: "1 / 3", gridRow: 1}}>
-                        <b>{"Id: "}</b><span>{selectedUser?.id}</span>
+                <ArrowNavigation prevPage="manageUsers" sx={{gridRow: 1}} />
+                <SectionHeader text={t("createUser")} sx={{gridRow: 2}} />
+                {edit && ( 
+                    <Box sx={{gridRow: 3, display:"flex", ml: 2, mr: 2, mt: 2,
+                        justifyContent: "space-between", alignItems: "center" }}>
+                        <span><b>{"Id: "}</b>{selectedUser?.id}</span>
+                        <Tooltip title={t("deleteAccount")}>
+                            <IconButton onClick={() => setDeleteDialogOpen(true)}>
+                                <Delete color="error"/>
+                            </IconButton>
+                        </Tooltip>
                     </Box>
+                )}
 
-                    <Tooltip title={t("deleteAccount")} sx={{gridColumn: 3, gridRow: 1}}>
-                        <IconButton onClick={() => setDeleteDialogOpen(true)}>
-                            <Delete color="error" />
-                        </IconButton>
-                    </Tooltip>
-                </Fragment>
-            )}
-
-            <TextField
-                sx={{gridColumn: 1, gridRow: 2}}
-                id="firstname"
-                variant="standard"
-                type="text"
-                autoCorrect="off"
-                fullWidth
-
-                label={t("firstName")}
-                {...register("firstName", {required: "firstNameRequired"})}
-                error={errors.firstName !== undefined}
-                helperText={errors.firstName && t(errors.firstName.message!)}
-            />
-
-            <TextField
-                sx={{gridColumn: 2, gridRow: 2}}
-                id="lastname"
-                variant="standard"
-                type="text"
-                autoCorrect="off"
-                fullWidth
-
-                label={t("lastName")}
-                {...register("lastName", {required: "lastNameRequired"})}
-                error={errors.lastName !== undefined}
-                helperText={errors.lastName && t(errors.lastName.message!)}
-            />
-
-            <TextField
-                sx={{gridColumn: 1, gridRow: 3}}
-                id="username"
-                variant="standard"
-                type="text"
-                autoCorrect="off"
-                fullWidth
-
-                label={t("userName")}
-                {...register("userName", {
-                    required: "userNameRequired",
-                    validate: {
-                        unique: v => resolveUniqueUsername(v) || "usernameExistError"
-                        // unique: v => (!usernames.includes(v.toLowerCase()) && edit) || "usernameExistError"
-                    }
-                })}
-                disabled={edit}
-                error={errors.userName !== undefined}
-                helperText={errors.userName && t(errors.userName.message!)}
-            />
-
-            <TextField
-                sx={{gridColumn: 2, gridRow: 3}}
-                id="password"
-                variant="standard"
-                type="text"
-                autoCorrect="off"
-                fullWidth
-
-                InputLabelProps={{
-                    shrink: passwordExist
-                }}
-
-                label={edit ? t("newPassword") : t("password")}
-                {...register("password", {
-                    required: edit ? false : true,
-                })}
-                error={errors.password !== undefined}
-                helperText={errors.password && t("passwordRequired")}
-            />
-
-            <Tooltip title={t("generateRandomPassword")} sx={{gridColumn: 3, gridRow: 3}}>
-                <IconButton onClick={generateRandomPassword}>
-                    <Password />
-                </IconButton>
-            </Tooltip>
-
-            <TextField
-                sx={{gridColumn: 1, gridRow: 4}}
-                id="company"
-                variant="standard"
-                type="text"
-                autoCorrect="off"
-                fullWidth
-
-                label={t("company")}
-                {...register("company")}
-            />
-
-            <TextField
-                sx={{gridColumn: 2, gridRow: 4}}
-                id="email"
-                variant="standard"
-                type="text"
-                autoCorrect="off"
-                fullWidth
-
-                label={t("email")}
-                {...register("email", {
-                    required: "emailRequired",
-                    pattern: {
-                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                        message: "emailPatternError"
-                    }
-                })}
-                error={errors.email !== undefined}
-                helperText={errors.email && t(errors.email.message!)}
-            />
-
-            <TextField
-                sx={{gridColumn: "1 / 3 ", gridRow: 5}}
-                id="expire"
-                variant="standard"
-                type="date"
-                InputProps={{
-                    inputProps: {
-                        min: dateMin,
-                        max: dateMax
-                    }
-                }}
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                autoCorrect="off"
-                fullWidth
-
-                label={t("expire")}
-                {...register("accountExpire")}
-
-            />
-
-            {registerError && (
-                <Typography 
-                    sx={{
-                        gridRow: 8, gridColumn: "1 / 3",
-                        color: "darkred",
-                        fontWeight: 600,
-                    }}
-                    variant="caption">
-                        {t(registerError)}
-                    </Typography>
-            )}
-
-            <Button 
-                sx={{gridColumn: "1 / 3", gridRow: 7}}
-                variant="contained"
-                color="success"
-                type="submit"
-                disabled={!changed && edit && (confirmPasswordChange ? !confirmPasswordChange : true)}
+            <Box
+                sx={{
+                    gridRow: 4,
+                    mt: 2, ml: 2, mr: 2,
+                    display: "grid",
+                    gridTemplateRows: "repeat(8, max-content)",
+                    gridTemplateColumns: "1fr 1fr max-content",
+                    gridGap: "10px",
+                    alignItems: "center",
+                }} 
+                component="form"
+                autoComplete="off"
+                onSubmit={handleSubmit(submit)}
             >
-                    {edit ? t("update") : t("create")}
-            </Button>
- 
-            {edit && passwordExist && (
-                <FormGroup sx={{gridColumn: "1 / 3", gridRow: 6}}>
-                    <FormControlLabel
-                        label={t("confirmNewPassword")}
-                        control={<Checkbox 
-                            checked={confirmPasswordChange}
-                            onChange={() => setConfirmPasswordChange(!confirmPasswordChange)} />}
-                    />
-                </FormGroup>
-            )}
+                <TextField
+                    sx={{gridColumn: 1, gridRow: 2}}
+                    id="firstname"
+                    variant="standard"
+                    type="text"
+                    autoCorrect="off"
+                    fullWidth
+
+                    label={t("firstName")}
+                    {...register("firstName", {required: "firstNameRequired"})}
+                    error={errors.firstName !== undefined}
+                    helperText={errors.firstName && t(errors.firstName.message!)}
+                />
+
+                <TextField
+                    sx={{gridColumn: 2, gridRow: 2}}
+                    id="lastname"
+                    variant="standard"
+                    type="text"
+                    autoCorrect="off"
+                    fullWidth
+
+                    label={t("lastName")}
+                    {...register("lastName", {required: "lastNameRequired"})}
+                    error={errors.lastName !== undefined}
+                    helperText={errors.lastName && t(errors.lastName.message!)}
+                />
+
+                <TextField
+                    sx={{gridColumn: 1, gridRow: 3}}
+                    id="username"
+                    variant="standard"
+                    type="text"
+                    autoCorrect="off"
+                    fullWidth
+
+                    label={t("userName")}
+                    {...register("userName", {
+                        required: "userNameRequired",
+                        validate: {
+                            unique: v => resolveUniqueUsername(v) || "usernameExistError"
+                            // unique: v => (!usernames.includes(v.toLowerCase()) && edit) || "usernameExistError"
+                        }
+                    })}
+                    disabled={edit}
+                    error={errors.userName !== undefined}
+                    helperText={errors.userName && t(errors.userName.message!)}
+                />
+
+                <TextField
+                    sx={{gridColumn: 2, gridRow: 3}}
+                    id="password"
+                    variant="standard"
+                    type="text"
+                    autoCorrect="off"
+                    fullWidth
+
+                    InputLabelProps={{
+                        shrink: passwordExist
+                    }}
+
+                    label={edit ? t("newPassword") : t("password")}
+                    {...register("password", {
+                        required: edit ? false : true,
+                    })}
+                    error={errors.password !== undefined}
+                    helperText={errors.password && t("passwordRequired")}
+                />
+
+                <Tooltip title={t("generateRandomPassword")} sx={{gridColumn: 3, gridRow: 3}}>
+                    <IconButton onClick={generateRandomPassword}>
+                        <Password />
+                    </IconButton>
+                </Tooltip>
+
+                <TextField
+                    sx={{gridColumn: 1, gridRow: 4}}
+                    id="company"
+                    variant="standard"
+                    type="text"
+                    autoCorrect="off"
+                    fullWidth
+
+                    label={t("company")}
+                    {...register("company")}
+                />
+
+                <TextField
+                    sx={{gridColumn: 2, gridRow: 4}}
+                    id="email"
+                    variant="standard"
+                    type="text"
+                    autoCorrect="off"
+                    fullWidth
+
+                    label={t("email")}
+                    {...register("email", {
+                        required: "emailRequired",
+                        pattern: {
+                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: "emailPatternError"
+                        }
+                    })}
+                    error={errors.email !== undefined}
+                    helperText={errors.email && t(errors.email.message!)}
+                />
+
+                <TextField
+                    sx={{gridColumn: "1 / 3 ", gridRow: 5}}
+                    id="expire"
+                    variant="standard"
+                    type="date"
+                    InputProps={{
+                        inputProps: {
+                            min: dateMin,
+                            max: dateMax
+                        }
+                    }}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    autoCorrect="off"
+                    fullWidth
+
+                    label={t("expire")}
+                    {...register("accountExpire")}
+
+                />
+
+                {registerError && (
+                    <Typography 
+                        sx={{
+                            gridRow: 8, gridColumn: "1 / 3",
+                            color: "darkred",
+                            fontWeight: 600,
+                        }}
+                        variant="caption">
+                            {t(registerError)}
+                        </Typography>
+                )}
+
+                <Button 
+                    sx={{gridColumn: "1 / 3", gridRow: 7}}
+                    variant="contained"
+                    color="success"
+                    type="submit"
+                    disabled={!changed && edit && (confirmPasswordChange ? !confirmPasswordChange : true)}
+                >
+                        {edit ? t("update") : t("create")}
+                </Button>
+    
+                {edit && passwordExist && (
+                    <FormGroup sx={{gridColumn: "1 / 3", gridRow: 6}}>
+                        <FormControlLabel
+                            label={t("confirmNewPassword")}
+                            control={<Checkbox 
+                                checked={confirmPasswordChange}
+                                onChange={() => setConfirmPasswordChange(!confirmPasswordChange)} />}
+                        />
+                    </FormGroup>
+                )}
 
 
+            </Box>
         </Box>
     )
 }

@@ -52,7 +52,7 @@ export const ContentButtonDrawer = ({sx}: IProps) => {
                 <ContentButton text={t("education")} svg={School} onClick={() => handleButtonClick("education")} />
                 <ContentButton text={t("experience")} svg={Work} onClick={() => handleButtonClick("experience")} />
                 <ContentButton text={t("skills")}  svg={DataObject} onClick={() => handleButtonClick("skills")} />
-                <ContentButton text={t("portfolio")} svg={FolderShared} onClick={() => handleButtonClick("projects")} />
+                <ContentButton text={t("portfolio")} svg={FolderShared} onClick={() => handleButtonClick("portfolio")} />
                 <Divider />
                 <ContentButton text={t("exportPdf")} svg={PictureAsPdf} onClick={() => alert("not implemented")} />
 

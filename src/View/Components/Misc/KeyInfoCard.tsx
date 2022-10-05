@@ -36,7 +36,7 @@ export const KeyInfoCard = ({sx}: IProps) => {
                 alt="profile picture" 
                 sx={{
                     height: "auto",
-                    maxWidth: 200,
+                    maxWidth: "200px",
                     margin: "0 auto"
                 }} />
 

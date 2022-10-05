@@ -33,6 +33,7 @@ export const ExperienceContainer = () => {
                             content: "Cleaningboy"
                         }
                     ],
+                    subheader: [],
                     text: [
                         {
                             id: "lang3",
@@ -63,6 +64,7 @@ export const ExperienceContainer = () => {
                             content: "Shop Assistand"
                         }
                     ],
+                    subheader: [],
                     text: [
                         {
                             id: "lang7",
@@ -93,6 +95,7 @@ export const ExperienceContainer = () => {
                             content: "Store Manager",
                         }
                     ],
+                    subheader: [],
                     text: [
                         {
                             id: "lang11",

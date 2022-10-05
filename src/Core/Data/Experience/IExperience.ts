@@ -13,7 +13,7 @@ export interface IExperience {
     /** header or title */
     header: ITextLocale[];
     /** subheader or subtitle */
-    subheader?: ITextLocale[];
+    subheader: ITextLocale[];
     /** content text  */
-    text?: ITextLocale[];
+    text: ITextLocale[];
 }

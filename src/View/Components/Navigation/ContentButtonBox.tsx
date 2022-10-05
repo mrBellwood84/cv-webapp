@@ -43,7 +43,7 @@ export const ContentButtonBox = ({sx}: IProps) => {
                 <ContentButton text={t("education")} svg={School} onClick={() => btnClick("education")} />
                 <ContentButton text={t("experience")} svg={Work} onClick={() => btnClick("experience")} />
                 <ContentButton text={t("skills")}  svg={DataObject} onClick={() => btnClick("skills")} />
-                <ContentButton text={t("portfolio")} svg={FolderShared} onClick={() => btnClick("projects")} />
+                <ContentButton text={t("portfolio")} svg={FolderShared} onClick={() => btnClick("portfolio")} />
                 <Divider />
                 <ContentButton text={t("exportPdf")} svg={PictureAsPdf} onClick={() => alert("not implemented")} />
             </List>

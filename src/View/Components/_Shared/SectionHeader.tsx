@@ -1,17 +1,19 @@
-import { Box, Typography } from "@mui/material";
+import { Box, SxProps, Typography } from "@mui/material";
 
 interface IProps {
     text: string;
+    sx?: SxProps;
 }
 
-export const SectionHeader = ({text}: IProps) => {
+export const SectionHeader = ({text, sx}: IProps) => {
 
     return (
     <Box 
         sx={{
             mt: 1,
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
+            ...sx,
         }}
     >
 

@@ -11,10 +11,9 @@ export const MainUser = () => {
    return (
     <Box sx={{
         minHeight: "100vh",
-        width: "100vw",
         display: "grid",
         gridTemplateColumns: "auto",
-        gridTemplateRows: "max-content max-content auto",
+        gridTemplateRows: "max-content max-content",
     }}>
         <Appbar sx={{
             gridRow: 1,
@@ -23,11 +22,14 @@ export const MainUser = () => {
 
         <Box sx={{
             gridRow: 2,
+            width: "100%",
+            maxWidth: "950px",
+            margin: "0 auto",
             display: "grid",
             gridTemplateRows: "max-content auto",
             gridTemplateColumns: "max-content auto",
             gridGap: 5,
-            margin: 1
+            pr: 1, pt: 1
         }}>
             <KeyInfoCard sx={{
                 display: {xs: "none", md: "block"},
@@ -44,7 +46,7 @@ export const MainUser = () => {
             <ContentContainer sx={{
                 gridColumn: 2,
                 gridRow: "1 / 4",
-                pl: 2
+                pl: 1,
             }} />
 
             <ContentButtonDrawer sx={{

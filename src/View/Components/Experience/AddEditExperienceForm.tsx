@@ -7,12 +7,15 @@ import { useTranslation } from "react-i18next";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { LoadingBox } from "../Misc/LoadingBox";
 import { DeleteDialog } from "../Admin/DeleteDialog";
-import { Box, Button, IconButton, TextField, Tooltip, Typography } from "@mui/material";
+import { Box, Button, IconButton, SxProps, TextField, Tooltip, Typography } from "@mui/material";
 import { FormLanguageToggle } from "../_Shared/FormLanguageToggle";
 import { experienceAgent } from "../../../Core/ApiAgent/experienceAgent";
 import { Delete } from "@mui/icons-material";
 import { educationStore } from "../../../Core/Store/Stores/educationStore";
 import { utilStore } from "../../../Core/Store/Stores/utils";
+import { employmentStore } from "../../../Core/Store/Stores/employmentStore";
+import { ArrowNavigation } from "../Navigation/ArrowNavigation";
+import { SectionHeader } from "../_Shared/SectionHeader";
 
 
 type ExperienceFormData = {
@@ -92,11 +95,12 @@ const mapToDbData = (dataType: Experience, formData: ExperienceFormData, origina
 type Experience = "expEduc" | "expOther" | "none"
 
 interface IProps {
-    datatype: Experience
+    datatype: Experience,
+    sx?: SxProps,
 }
 
 
-export const AddEditExperienceForm = ({datatype}: IProps) => {
+export const AddEditExperienceForm = ({datatype, sx}: IProps) => {
 
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
@@ -109,7 +113,7 @@ export const AddEditExperienceForm = ({datatype}: IProps) => {
     const [languageSelect, setLanguageSelect] = useState<string>(lang)
 
     const expEduc = useAppSelector((state) => state.education.selectedOtherEduc)
-    const expOther = undefined; // not implemented...
+    const expOther = useAppSelector((state) => state.employment.selectedOtherExp)
 
     if (Boolean(expEduc) && Boolean(expOther)) {
         console.error("DEV :: Both experience types for this form exist in app state!!!")
@@ -247,10 +251,12 @@ export const AddEditExperienceForm = ({datatype}: IProps) => {
         if (datatype === "expEduc") {
             dispatch(educationStore.actions.addOther(result))
             dispatch(utilStore.actions.setActiveView("education"))
+            return
         }
 
         if (datatype === "expOther") {
-            throw new Error("Createing other experience not implemented")
+            dispatch(employmentStore.actions.addOtherExperience(result))
+            dispatch(utilStore.actions.setActiveView("experience"))
         }
     }
 
@@ -264,10 +270,12 @@ export const AddEditExperienceForm = ({datatype}: IProps) => {
         if (datatype === "expEduc") {
             dispatch(educationStore.actions.updateOther(result))
             dispatch(utilStore.actions.setActiveView("education"))
+            return
         }
 
         if (datatype === "expOther") {
-            throw new Error("Updating other experiences not implemented")
+            dispatch(employmentStore.actions.updateOtherExperience(result))
+            dispatch(utilStore.actions.setActiveView("experience"))
         }
     }
 
@@ -284,10 +292,12 @@ export const AddEditExperienceForm = ({datatype}: IProps) => {
         if (datatype === "expEduc") {
             dispatch(educationStore.actions.removeOther(id));
             dispatch(utilStore.actions.setActiveView("education"))
+            return
         }
 
         if (datatype === "expOther") {
-            throw new Error("Deleting other experience item not implemented")
+            dispatch(employmentStore.actions.removeExperience(id));
+            dispatch(utilStore.actions.setActiveView("experience"));
         }
  
     }
@@ -295,21 +305,44 @@ export const AddEditExperienceForm = ({datatype}: IProps) => {
     if (apiLoading) return <LoadingBox />
 
     return (
-        <Fragment>
-            <DeleteDialog 
-                isOpen={deleteDialogOpen}
-                handleClose={() => setDeleteDialogOpen(false)}
-                contentText={`${t("deleteText")} ${findContentByLanguage(selected?.header, languageSelect)}`}
-                handleDelete={deleteExperience}
-            />
+        <Box sx={{
+            display: "grid",
+            gridTemplateRows: "repeat(4, max-content)",
+            gridGap: 5,
+            ...sx,
+        }} >
 
-            <Box sx={{width: "100%", display: "flex"}}>
-                <FormLanguageToggle 
-                    sx={{mt: 1}}
-                    language={languageSelect}
-                    setLanguage={setLanguageSelect}
+            {selected && (
+                <DeleteDialog 
+                    isOpen={deleteDialogOpen}
+                    handleClose={() => setDeleteDialogOpen(false)}
+                    contentText={`${t("deleteText")} ${findContentByLanguage(selected?.header, languageSelect)}`}
+                    handleDelete={deleteExperience}
                 />
+            )}
 
+            {selected && (
+                <Fragment>
+                    <ArrowNavigation 
+                        sx={{gridRow: 1}}
+                        prevPage={(datatype === "expEduc" ? "education" : "experience")} />
+                    <SectionHeader
+                        text={(datatype === "expEduc") ? t("editOtherEducation") : t("editOtherExperience")}
+                        sx={{gridRow: 2}} />
+                </Fragment>
+            )}
+
+
+            <Box sx={{
+                gridRow: 3,
+                display: "flex",
+                ml: 2, mt: 2
+        
+            }}>
+                <FormLanguageToggle 
+                    language={languageSelect}
+                    setLanguage={setLanguageSelect} />
+                
                 {edit && (
                     <Tooltip title={t("delete")} sx={{ml: "auto"}}>
                         <IconButton onClick={() => setDeleteDialogOpen(true)}>
@@ -318,7 +351,6 @@ export const AddEditExperienceForm = ({datatype}: IProps) => {
                     </Tooltip>
                 )}
             </Box>
-
 
             <Box
                 sx={{
@@ -475,6 +507,6 @@ export const AddEditExperienceForm = ({datatype}: IProps) => {
             </Box>
 
             
-        </Fragment>
+        </Box>
     )
 }

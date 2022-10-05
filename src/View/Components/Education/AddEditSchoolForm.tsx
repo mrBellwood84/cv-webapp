@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, TextField, Tooltip, Typography } from "@mui/material"
+import { Box, Button, IconButton, SxProps, TextField, Tooltip, Typography } from "@mui/material"
 import { Fragment, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
@@ -14,6 +14,8 @@ import { educationStore } from "../../../Core/Store/Stores/educationStore"
 import { utilStore } from "../../../Core/Store/Stores/utils"
 import { Delete } from "@mui/icons-material"
 import { schoolAgent } from "../../../Core/ApiAgent/schoolAgent"
+import { ArrowNavigation } from "../Navigation/ArrowNavigation"
+import { SectionHeader } from "../_Shared/SectionHeader"
 
 type SchoolFormData = {
     id: string;
@@ -111,7 +113,11 @@ const mapToDbData = (data: SchoolFormData, original?: ISchool): ISchool => {
     return schoolData
 }
 
-export const AddEditSchoolForm = () => {
+interface IProps {
+    sx?: SxProps;
+}
+
+export const AddEditSchoolForm = ({sx}: IProps) => {
 
     const  { t } = useTranslation()
     const dispatch = useAppDispatch()
@@ -158,7 +164,7 @@ export const AddEditSchoolForm = () => {
         }
         if (lang === "en") {
             if (errors.course_EN?.type === "required") return "courseRequired"
-            if (errors.course_NO?.type === "required") return "norwegianTextRequired"
+            if (errors.course_NO?.type === "required") return "norwegianTextMissing"
             text = watch("course_NO")
         }
 
@@ -260,7 +266,12 @@ export const AddEditSchoolForm = () => {
     if (apiLoading) return <LoadingBox />
 
     return (
-        <Fragment>
+        <Box sx={{
+            display: "grid",
+            gridTemplateRows: "repeat(4, max-content)",
+            gridGap: 5,
+            ...sx,
+        }}>
 
             {selected && (
                 <DeleteDialog  
@@ -271,9 +282,20 @@ export const AddEditSchoolForm = () => {
                 />
             )}
 
-                <Box sx={{widht: "100%", display: "flex"}}>
+                {selected && (
+                    <Fragment>
+                        <ArrowNavigation prevPage="education" sx={{gridRow: 1}} />
+                        <SectionHeader text={t("editSchool")} sx={{gridRow: 2 }} />
+                    </Fragment>
+                )}
+
+                <Box sx={{
+                    gridRow: 3,
+                    display: "flex",
+                    ml: 2, mt: 2
+            
+                }}>
                     <FormLanguageToggle 
-                        sx={{ mt: 1}}
                         language={languageSelect}
                         setLanguage={setLanguageSelect} />
                     
@@ -289,6 +311,7 @@ export const AddEditSchoolForm = () => {
 
                 <Box
                     sx={{
+                        gridRow: 4,
                         m: 2,
                         display:"grid",
                         gridTemplateColumns: "1fr 1fr",
@@ -343,7 +366,7 @@ export const AddEditSchoolForm = () => {
 
                             label={t("course")}
                             {...register("course_NO", {required: "courseRequired"})}
-                            error={(errors.course_EN !== undefined) || (errors.course_NO === undefined)}
+                            error={(errors.course_EN !== undefined) || (errors.course_NO !== undefined)}
                             helperText={t((`${resolveCourseHelperText("no")}`))}
                         />
                     )}
@@ -359,7 +382,7 @@ export const AddEditSchoolForm = () => {
 
                             label={t("course")}
                             {...register("course_EN")}
-                            error={(errors.course_EN !== undefined) || (errors.course_NO === undefined)}
+                            error={(errors.course_EN !== undefined) || (errors.course_NO !== undefined)}
                             helperText={t((`${resolveCourseHelperText("en")}`))}
                         />
                     )}
@@ -446,6 +469,6 @@ export const AddEditSchoolForm = () => {
                     </Button>
 
                 </Box>
-        </Fragment>
+        </Box>
     )
 }

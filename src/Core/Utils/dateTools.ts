@@ -121,7 +121,7 @@ export const createYearMonthSpan = (
     lang:string, 
     start: string, 
     end: string | undefined = undefined, 
-    short: boolean = false
+    short: boolean = false,
 ): string => {
 
     if (!i18n.languages.includes(lang)) lang = "en";
@@ -133,10 +133,10 @@ export const createYearMonthSpan = (
     
     if (short) {
         startMonth = monthNames.find(x => x.code === lang)!.content[startDateObj.getMonth()].short;
-        endMonth = end ? monthNames.find(x => x.code === lang)!.content[startDateObj.getMonth()].short : "";
+        endMonth = endDateObj ? monthNames.find(x => x.code === lang)!.content[endDateObj.getMonth()].short : "";
     } else {
         startMonth = monthNames.find(x => x.code === lang)!.content[startDateObj.getMonth()].full;
-        endMonth = end ? monthNames.find(x => x.code === lang)!.content[startDateObj.getMonth()].full : "";
+        endMonth = endDateObj ? monthNames.find(x => x.code === lang)!.content[endDateObj.getMonth()].full : "";
     }
 
     return `${startMonth} ${startDateObj.getFullYear()} - ${endMonth} ${end ? endDateObj?.getFullYear() : ""}`.trimEnd();

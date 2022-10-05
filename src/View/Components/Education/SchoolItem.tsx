@@ -26,74 +26,50 @@ export const SchoolItem = ({item}: IProps) => {
     return (
         <Box sx={{
             display: "grid",
-            gridTemplateColumns: "auto max-content max-content",
+            gridTemplateColumns: "auto auto max-content",
             gridTemplateRows: "repeat(3, max-content)",
             width: "100%",
-            alignItems: "center"
-            
         }}>
-            <Typography 
-                variant="h6" 
-                component="div"
-                sx={{
-                    gridRow: 1,
-                    gridColumn: 1
-                }}
-            >
-                {item.schoolName.find(x => x.code === lang)?.content!}
+
+            <Typography variant="subtitle1" component="div"
+                sx={{gridRow: 1, gridColumn: 1, fontWeight: 600}}>
+                    {item.schoolName.find(x => x.code === lang)?.content!}
             </Typography>
 
-            <Typography
-                variant="subtitle2"
-                component="div"
-                sx={{
-                    gridRow: 1,
-                    gridColumn: 2
-                }}
-            >
-                {createYearMonthSpan(lang, item.startDate, item.endDate)}
-            </Typography>
-
-            <Typography
-                variant="body1"
-                component="div"
-                sx={{
-                    gridRow: 2,
-                    gridColumn: "1 / 3"
-                }}
-            >
-                {item.course.find(x => x.code === lang)!.content}
+            <Typography variant="subtitle1" component="div"
+                sx={{gridRow: 2, gridColumn: 1}}>
+                    {item.course.find(x => x.code === lang)?.content!}
             </Typography>
 
             {item.text.length > 0 && (
-                <Typography
-                    variant="body2"
-                    component="div"
-                    sx={{
-                        mt: 0.3,
-                        gridRow: 3,
-                        gridColumn: "1/3"
-                    }}
-                >
-                    {item.text.find(x => x.code === lang)?.content}
+                <Typography variant="body2" component="div"
+                    sx={{gridRow: 3, gridColumn: 1}}>
+                        {item.text.find(x => x.code === lang)?.content!}
                 </Typography>
             )}
 
+            <Typography variant="caption" component="div"
+                sx={{
+                    gridRow: "1 / 2", gridColumn: 2, 
+                    mr: isAdmin ? 2 : 0,
+                    justifySelf: "right", textAlign: "right"
+                     }}>
+                    {createYearMonthSpan(lang, item.startDate, item.endDate)}
+            </Typography>
+
+
             {isAdmin && (
-                <Box sx={{
-                    gridColumn: 3,
-                    gridRow: "1 / 4",
-                }}>
-                    <Tooltip title={t("edit")} sx={{
-                        ml: 2,
-                        p: 2
-                    }}>
+                <Box sx={{ 
+                    gridColumn: 3, gridRow: "1 / 4", 
+                    borderLeft: "1px solid lightgrey",
+                    alignSelf:"center" }}>
+                    <Tooltip title={t("edit")} sx={{ml: 1, p: 1 }}>
                         <IconButton onClick={handleEditClick}>
                             <Edit color="primary" />
                         </IconButton>
                     </Tooltip>
                 </Box>
-            )}
+            )} 
 
         </Box>
     )

@@ -1,4 +1,4 @@
-import { Box, SxProps, Theme } from "@mui/material"
+import { SxProps } from "@mui/material"
 import { useAppSelector } from "../../../Core/Store/hooks"
 import { EducationContainer } from "../Education/EducationContainer"
 import { HomeContainer } from "../Home/HomeContainer"
@@ -6,13 +6,14 @@ import { ProjectContainer } from "../Projects/ProjectsContainer"
 import { SkillsContainer } from "../Skills/SkillsContainer"
 import { ExperienceContainer } from "../Experience/ExperienceContainer"
 import { ManageUsersContainer } from "../Admin/ManageUsersContainer"
-import { EditUserContainer } from "../Admin/EditUserContainer"
 import { AddEducationContainer } from "../Education/AddEducationContainer"
 import { AddEditSchoolForm } from "../Education/AddEditSchoolForm"
 import { AddEditExperienceForm } from "../Experience/AddEditExperienceForm"
+import { Fragment } from "react"
+import { CreateEditUserForm } from "../Admin/CreateEditUserForm"
 
 interface IProps {
-    sx: SxProps<Theme>
+    sx: SxProps;
 }
 
 export const ContentContainer = ({sx}: IProps) => {
@@ -23,63 +24,65 @@ export const ContentContainer = ({sx}: IProps) => {
     switch(activeView) {
         case "education":
             return (
-                <Box sx={{...sx}}>
-                    <EducationContainer />
-                </Box>
+                <Fragment>
+                    <EducationContainer sx={{...sx}} />
+                </Fragment>
             )
 
         case "addEducation":
-            return <Box sx={{...sx}}>
-                {isAdmin ? <AddEducationContainer/> : <HomeContainer />}
-            </Box>
+            return (
+                <Fragment>
+                    {isAdmin ? <AddEducationContainer sx={{...sx}} /> : <HomeContainer sx={{...sx}} />}
+                </Fragment>
+            )
 
         case "editSchool":
-            return <Box sx={{...sx}}>
-                {isAdmin ? <AddEditSchoolForm /> : <HomeContainer />}
-            </Box>
+            return <Fragment>
+                {isAdmin ? <AddEditSchoolForm sx={{...sx}} /> : <HomeContainer sx={{...sx}} />}
+            </Fragment>
 
         case "editExperience":
-            return <Box sx={{...sx}}>
-                {isAdmin ? <AddEditExperienceForm datatype="none"  /> : <HomeContainer />}
-            </Box>
+            return <Fragment>
+                {isAdmin ? <AddEditExperienceForm datatype="none" sx={{...sx}}  /> : <HomeContainer sx={{...sx}} />}
+            </Fragment>
             
         case "experience":
             return (
-                <Box sx={{...sx}}>
+                <Fragment>
                     <ExperienceContainer />
-                </Box>
+                </Fragment>
             )
         case "skills":
             return (
-                <Box sx={{...sx}}>
+                <Fragment>
                     <SkillsContainer />
-                </Box>
+                </Fragment>
             )
-        case "projects":
+        case "portfolio":
             return (
-                <Box sx={{...sx}}>
+                <Fragment>
                     <ProjectContainer />
-                </Box>
+                </Fragment>
             )
         case "manageUsers":
             return (
-                <Box sx={{...sx}}>
-                    {isAdmin ? <ManageUsersContainer /> : <HomeContainer />}
-                </Box>
+                <Fragment>
+                    {isAdmin ? <ManageUsersContainer sx={{...sx}} /> : <HomeContainer sx={{...sx}} />}
+                </Fragment>
             )
 
         case "editUser":
             return (
-                <Box sx={{...sx}}>
-                    {isAdmin ? <EditUserContainer /> : <HomeContainer />}
-                </Box>
+                <Fragment>
+                    {isAdmin ? <CreateEditUserForm sx={{...sx}} /> : <HomeContainer sx={{...sx}} />}
+                </Fragment>
             )
 
         default:
             return (
-                <Box sx={{...sx}}>
-                    <HomeContainer />
-                </Box>
+                <Fragment>
+                    <HomeContainer sx={{...sx}} />
+                </Fragment>
                 )
 
 

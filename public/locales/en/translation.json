@@ -90,7 +90,10 @@
     "title" : "Title",
     "titleRequired" : "Title required...",
     "subtitle" : "Subtitle",
-    "close": "Close"
+    "close": "Close",
+    "editSchool" : "Edit school",
+    "editOtherEducation" : "Edit other education",
+    "editOtherExperience" : "Edit other experience"
 
 
 }
