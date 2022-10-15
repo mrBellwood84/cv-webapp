@@ -1,115 +1,102 @@
-import { Fragment } from "react"
+import { Add } from "@mui/icons-material"
+import { Box, Button, SxProps, Typography } from "@mui/material"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IProject } from "../../../Core/Data/Portfolio/IProject"
+import { portfolioAgent } from "../../../Core/ApiAgent/portfolioAgent"
+import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
+import { portfolioStore } from "../../../Core/Store/Stores/portfolioStore"
+import { utilStore } from "../../../Core/Store/Stores/utilsStore"
+import { LoadingBox } from "../Misc/LoadingBox"
+import { ArrowNavigation } from "../Navigation/ArrowNavigation"
+import { SectionHeader } from "../_Shared/SectionHeader"
 import { SectionStack } from "../_Shared/SectionStack"
-import { PortfolioItem } from "./PortfolioItems"
 
-export const ProjectContainer = () => {
+interface IProps {
+    sx?: SxProps;
+}
+
+export const ProjectContainer = ({ sx }: IProps) => {
 
     const { t } = useTranslation();
+    const dispatch = useAppDispatch()
 
-    const projects: IProject[] = [
-        {
-            id: "proj1",
-            name: "Rolfmusic.com",
-            languages: [
-                {
-                    id: "lang1",
-                    name: "Python",
-                    type: "language",
-                    rating: 1,
-                    svgUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-                    text: [{
-                        id: "",
-                        code: "",
-                        content: ""
-                    }]
+    const [apiLoading, setApiLoading] = useState<boolean>(false)
+
+    const project = useAppSelector((state) => state.portfolio.projects)
+    const role = useAppSelector((state) => state.account.account?.role);
+
+    const handleAddProject = () => {
+        dispatch(portfolioStore.actions.clearSelected())
+        dispatch(utilStore.actions.setActiveView("addEditProject"))
+    }
+
+    useEffect(() => {
+        const loadProjectData = async () => {
+            if (project.length > 0) return;
+            try {
+                const response = await portfolioAgent.getAll();
+                if (typeof response === "number"){
+                    console.error(response, "DEV :: could not fetch project data");
+                    return;
                 }
-            ],
-            frameworks: [
-                {
-                    id: "framework1",
-                    name: "Django",
-                    type: "language",
-                    rating: 1,
-                    svgUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain-wordmark.svg",
-                    text: [{
-                        id: "",
-                        code: "",
-                        content: ""
-                    }],
-                }
-            ],
-            text: [
-                {
-                    id: "lang1",
-                    code: "no",
-                    content: "Jeg smekket sammen en liten nettside for et rockeband. Mitt eget rockeband faktisk. Det var en veldig god øvelse i både python og bruk av rammeverket Django. Jeg lekte meg også en del med CSS som jeg ærlig må inrømme at jeg ikke er noen verdensmester på. Men det ble en slags nettside av det da. "
-                },
-                {
-                    id: "lang2",
-                    code: "en",
-                    content: "Website for rockband"
-                }
-            ],
-            linkWebsiteUrl: "rolfmusic.com",
-        },
-        {
-            id: "proj1",
-            name: "Overtime Webapp",
-            languages: [
-                {
-                    id: "lang1",
-                    name: "Typescript",
-                    type: "language",
-                    rating: 1,
-                    svgUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-                    text: [{
-                        id: "",
-                        code: "",
-                        content: ""
-                    }]
-                }
-            ],
-            frameworks: [
-                {
-                    id: "framework1",
-                    name: "React",
-                    type: "language",
-                    rating: 1,
-                    svgUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                    text: [{
-                        id: "",
-                        code: "",
-                        content: ""
-                    }],
-                }
-            ],
-            text: [
-                {
-                    id: "lang1",
-                    code: "no",
-                    content: "Nettside for beregning av overtid"
-                },
-                {
-                    id: "lang2",
-                    code: "en",
-                    content: "Website for calculating overtime"
-                }
-            ],
-            linkRepoUrl: "github/overtime",
-        },
-    ]
+                dispatch((portfolioStore.actions.setProjects(response)))
+            } catch {
+                console.error(500, "DEV :: Something went wrong when fetching project data")
+            }
+        }
+
+        const loadData = async () => {
+            setApiLoading(true)
+            await loadProjectData()
+            setApiLoading(false)
+        }
+
+        loadData()
+
+    },[dispatch, project.length])
+
+    if (apiLoading) return <LoadingBox sx={{...sx}} />
 
     return (
-        <Fragment>
-            {projects && (projects.length > 0) && (
-                <SectionStack title={t("portfolio")}>
-                    {projects.map(x => (
-                        <PortfolioItem key={x.id} item={x} />
+        <Box sx={{
+            display: "grid",
+            gridTemplateColumns: "auto",
+            gridTemplateRows: "repeat(4, max-content)",
+            gridGap: 5,
+            ...sx,
+        }} >
+            
+            {role && role === "admin" && (
+                <Box sx={{
+                    gridRow: 1,
+                    display: "flex",
+                    alignItems: "center"
+                }}>
+                    <Button onClick={handleAddProject} startIcon={<Add />}>
+                        {t("addProject")}
+                    </Button>
+                </Box>
+            )}
+
+            <Typography variant="h4" component="div" sx={{gridRow: 2}}>
+                {t("portfolio")}
+            </Typography>
+
+            {project.length === 0 && (
+                <SectionHeader sx={{gridRow: 3}} text={t("noProjects")} />
+            )}
+
+            {project.length > 0 && (
+                <SectionStack title={t("framwwork")} sx={{gridRow: 3}}>
+                    {[...project]
+                    .map(item => (
+                        <div>project</div>
                     ))}
                 </SectionStack>
             )}
-        </Fragment>
+
+            <ArrowNavigation sx={{gridRow: 4, mb: 5}} prevPage="skills" />
+
+        </Box>
     )
 }

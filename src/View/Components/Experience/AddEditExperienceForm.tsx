@@ -1,4 +1,4 @@
-import { IExperience } from "../../../Core/Data/Experience/IExperience";
+import { ExperienceType, IExperience } from "../../../Core/Data/Experience/IExperience";
 import { findContentByLanguage, findIdByLanguage } from "../../../Core/Utils/languageTools";
 import { v4 as guid } from "uuid"
 import { Fragment, useState } from "react";
@@ -12,7 +12,7 @@ import { FormLanguageToggle } from "../_Shared/FormLanguageToggle";
 import { experienceAgent } from "../../../Core/ApiAgent/experienceAgent";
 import { Delete } from "@mui/icons-material";
 import { educationStore } from "../../../Core/Store/Stores/educationStore";
-import { utilStore } from "../../../Core/Store/Stores/utils";
+import { utilStore } from "../../../Core/Store/Stores/utilsStore";
 import { employmentStore } from "../../../Core/Store/Stores/employmentStore";
 import { ArrowNavigation } from "../Navigation/ArrowNavigation";
 import { SectionHeader } from "../_Shared/SectionHeader";
@@ -44,7 +44,7 @@ const mapToFormData = (data: IExperience): ExperienceFormData => {
     }
 }
 
-const mapToDbData = (dataType: Experience, formData: ExperienceFormData, original?: IExperience ): IExperience => {
+const mapToDbData = (dataType: ExperienceType, formData: ExperienceFormData, original?: IExperience ): IExperience => {
 
     let data: IExperience = {
         id: original ? original.id : guid(),
@@ -92,10 +92,8 @@ const mapToDbData = (dataType: Experience, formData: ExperienceFormData, origina
     return data;
 }
 
-type Experience = "expEduc" | "expOther" | "none"
-
 interface IProps {
-    datatype: Experience,
+    datatype: ExperienceType,
     sx?: SxProps,
 }
 
@@ -112,18 +110,10 @@ export const AddEditExperienceForm = ({datatype, sx}: IProps) => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false)
     const [languageSelect, setLanguageSelect] = useState<string>(lang)
 
-    const expEduc = useAppSelector((state) => state.education.selectedOtherEduc)
-    const expOther = useAppSelector((state) => state.employment.selectedOtherExp)
+    const educationExperience = useAppSelector((state) => state.education.selectedOtherEduc)
+    const otherExperience = useAppSelector((state) => state.employment.selectedOtherExp)
 
-    if (Boolean(expEduc) && Boolean(expOther)) {
-        console.error("DEV :: Both experience types for this form exist in app state!!!")
-    }
-
-    if ((Boolean(expEduc) || Boolean(expOther)) || datatype === "none") {
-        datatype = expEduc ? "expEduc" : "expOther";
-    }
-
-    const selected = datatype === "expEduc" ? expEduc : expOther;
+    const selected = datatype === "education" ? educationExperience : otherExperience;
 
     const edit = Boolean(selected);
 
@@ -248,13 +238,13 @@ export const AddEditExperienceForm = ({datatype, sx}: IProps) => {
             console.error(result, "DEV :: something went wrong")
             return
         }
-        if (datatype === "expEduc") {
+        if (datatype === "education") {
             dispatch(educationStore.actions.addOther(result))
             dispatch(utilStore.actions.setActiveView("education"))
             return
         }
 
-        if (datatype === "expOther") {
+        if (datatype === "other") {
             dispatch(employmentStore.actions.addOtherExperience(result))
             dispatch(utilStore.actions.setActiveView("experience"))
         }
@@ -267,13 +257,13 @@ export const AddEditExperienceForm = ({datatype, sx}: IProps) => {
             return
         }
 
-        if (datatype === "expEduc") {
+        if (datatype === "education") {
             dispatch(educationStore.actions.updateOther(result))
             dispatch(utilStore.actions.setActiveView("education"))
             return
         }
 
-        if (datatype === "expOther") {
+        if (datatype === "other") {
             dispatch(employmentStore.actions.updateOtherExperience(result))
             dispatch(utilStore.actions.setActiveView("experience"))
         }
@@ -289,20 +279,20 @@ export const AddEditExperienceForm = ({datatype, sx}: IProps) => {
             return
         }
 
-        if (datatype === "expEduc") {
+        if (datatype === "education") {
             dispatch(educationStore.actions.removeOther(id));
             dispatch(utilStore.actions.setActiveView("education"))
             return
         }
 
-        if (datatype === "expOther") {
+        if (datatype === "other") {
             dispatch(employmentStore.actions.removeExperience(id));
             dispatch(utilStore.actions.setActiveView("experience"));
         }
  
     }
 
-    if (apiLoading) return <LoadingBox />
+    if (apiLoading) return <LoadingBox sx={{...sx}} />
 
     return (
         <Box sx={{
@@ -325,9 +315,9 @@ export const AddEditExperienceForm = ({datatype, sx}: IProps) => {
                 <Fragment>
                     <ArrowNavigation 
                         sx={{gridRow: 1}}
-                        prevPage={(datatype === "expEduc" ? "education" : "experience")} />
+                        prevPage={(datatype === "education" ? "education" : "experience")} />
                     <SectionHeader
-                        text={(datatype === "expEduc") ? t("editOtherEducation") : t("editOtherExperience")}
+                        text={(datatype === "education") ? t("editOtherEducation") : t("editOtherExperience")}
                         sx={{gridRow: 2}} />
                 </Fragment>
             )}
@@ -354,6 +344,7 @@ export const AddEditExperienceForm = ({datatype, sx}: IProps) => {
 
             <Box
                 sx={{
+                    gridRow: 4,
                     m: 2,
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr",

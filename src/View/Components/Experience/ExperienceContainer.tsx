@@ -1,223 +1,138 @@
-import { Fragment } from "react"
+import { Add } from "@mui/icons-material"
+import { Box, Button, SxProps, Typography } from "@mui/material"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IEmployment } from "../../../Core/Data/Experience/IEmployment"
-import { IExperience } from "../../../Core/Data/Experience/IExperience"
-import { ExperienceItem } from "../Misc/ExperienceItem"
+import { employmentAgent } from "../../../Core/ApiAgent/employmentAgent"
+import { experienceAgent } from "../../../Core/ApiAgent/experienceAgent"
+import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
+import { employmentStore } from "../../../Core/Store/Stores/employmentStore"
+import { LoadingBox } from "../Misc/LoadingBox"
+import { SectionHeader } from "../_Shared/SectionHeader"
 import { SectionStack } from "../_Shared/SectionStack"
-import { EmploymentItem } from "./EmploymentItem"
+import { ExperienceItem } from "../Misc/ExperienceItem"
+import { ArrowNavigation } from "../Navigation/ArrowNavigation"
+import { utilStore } from "../../../Core/Store/Stores/utilsStore"
 
-export const ExperienceContainer = () => {
+
+interface IProps {
+    sx?: SxProps
+}
+
+
+export const ExperienceContainer = ({sx}: IProps) => {
 
     const { t } = useTranslation()
+    const dispatch = useAppDispatch()
 
-    const employment: IEmployment[] = [
-        {
-            id: "empl1",
-            employer: "Rema 1000",
-            startDate: new Date(2005, 7),
-            positions: [
-                {
-                    id: "pos1",
-                    type: "employmentData",
-                    startDate: new Date(2005, 7).toISOString(),
-                    endDate: new Date(2010, 5).toISOString(),
-                    header: [
-                        {
-                            id: "lang1",
-                            code:"no",
-                            content:"Ryddegutt",
-                        },
-                        {
-                            id: "lang2",
-                            code: "en",
-                            content: "Cleaningboy"
-                        }
-                    ],
-                    subheader: [],
-                    text: [
-                        {
-                            id: "lang3",
-                            code: "no",
-                            content: "Rydding og vasking i butikk, putte varer i hyller",
-                        },
-                        {
-                            id: "lang4",
-                            code: "en",
-                            content: "Cleaning and maintaining the store, restocking shelfs"
-                        }
-                    ],
-                },
-                {
-                    id: "pos2",
-                    type: "employmentData",
-                    startDate: new Date(2010, 5).toISOString(),
-                    endDate: new Date(2016, 8).toISOString(),
-                    header: [
-                        {
-                            id: "lang5",
-                            code: "no",
-                            content: "Butikkmedarbeider"
-                        },
-                        {
-                            id: "lang6",
-                            code: "en",
-                            content: "Shop Assistand"
-                        }
-                    ],
-                    subheader: [],
-                    text: [
-                        {
-                            id: "lang7",
-                            code: "no",
-                            content: "Full butikkmedarbeider med ansvar for kasse og bestilling",
-                        },
-                        {
-                            id: "lang8",
-                            code: "en",
-                            content: "Full-time shop employee with responsibility for checkout and ordering",
+    const [apiLoading, setApiLoading] = useState<boolean>(false);
 
-                        }
-                    ]
-                },
-                {
-                    id: "pos3",
-                    type: "employmentData",
-                    startDate: new Date(2016, 8).toISOString(),
-                    header: [
-                        {
-                            id: "lang9",
-                            code: "no",
-                            content: "Butikksjef",
-                        },
-                        {
-                            id: "lang10",
-                            code: "en",
-                            content: "Store Manager",
-                        }
-                    ],
-                    subheader: [],
-                    text: [
-                        {
-                            id: "lang11",
-                            code: "no",
-                            content: "Personell og økonomisk ansvar",
-                        },
-                        {
-                            id: "lang12",
-                            code: "en",
-                            content: "Personnel and financial responsibility",
-                        }
-                    ]
+    const employment = useAppSelector((state) => state.employment.employments);
+    const otherExperience = useAppSelector((state) => state.employment.otherExp);
+    const role = useAppSelector((state) => state.account.account?.role);
+
+    const handleAddEmployment = () => {
+        dispatch(employmentStore.actions.clearSelected());
+        dispatch(utilStore.actions.setActiveView("addExperience"))
+    }
+
+    useEffect(() => {
+
+        const loadEmploymentData = async () => {
+            if (employment.length > 0) return
+            try {
+                const response = await employmentAgent.getAll()
+                if (typeof response === "number") {
+                    console.error(response, "could not fetch employment data");
+                    return
                 }
-            ],
-            references: [
-                {
-                    id: "ref1",
-                    name: "Skinke-Hitler",
-                    role: [
-                        {
-                            id: "lang1",
-                            code: "no",
-                            content: "Konsernsjef"
-                        },
-                        {
-                            id: "lang2",
-                            code: "en",
-                            content: "CEO"
-                        }
-                    ],
-                    phonenumber: "+47 55 56 57 58",
-                    email: "hamhitler@mail.com",
-                },
-                {
-                    id: "ref2",
-                    name: "Kåre Kassemann",
-                    role: [
-                        {
-                            id: "lang3",
-                            code: "no",
-                            content: "Skiftleder"
-                        },
-                        {
-                            id: "lang4",
-                            code: "en",
-                            content: "Shift Manager"
-                        }
-                    ],
-                    phonenumber: "+47 97 55 00 55",
-                    email: "kaare.k.hansen@email.com",
-
-                }
-            ]
+                dispatch(employmentStore.actions.setEmployments(response))
+            } catch {
+                console.error(500, "Something went wrong when fetching employment data")
+            }
         }
-    ]
 
-    const otherExperiences: IExperience[] = [
-        {
-            id: "exp",
-            type: "expericence",
-            startDate: new Date(2010, 5).toISOString(),
-            header: [
-                {
-                    id: "lang10",
-                    code: "no",
-                    content: "Sture og Snørrnesene"
-                },
-                {
-                    id: "lang11",
-                    code: "en",
-                    content: "Sture & the Snotnoses"
+        const loadOtherExperience = async () => {
+            if (otherExperience.length > 0) return
+            try {
+                const response = await experienceAgent.getOtherExperience()
+                if (typeof response === "number") {
+                    console.error(response, "could not fetch other experience from api")
+                    return
                 }
-            ],
-            subheader: [
-                {
-                    id: "lang12",
-                    code: "no",
-                    content: "Gitarist i rockeband"
-                },
-                {
-                    id: "lang13",
-                    code: "en",
-                    content: "Guitarist in a rockband"
-                }
-            ],
-            text: [
-                {
-                    id: "lang14",
-                    code: "no",
-                    content: "Skrev halvparten av låtene, men drakk all pilsen",
-                },
-                {
-                    id: "lang15",
-                    code: "en",
-                    content: "Wrote half of the songs, but drank all the beer",
-                }
-            ]
+                dispatch(employmentStore.actions.setOtherExperience(response));
+            } catch {
+                console.error(500, "DEV :: Something went wrong with fetcing data from api")
+            }
         }
-    ]
+
+        const loadData = async () => {
+            setApiLoading(true)
+            await loadEmploymentData()
+            await loadOtherExperience()
+            setApiLoading(false)
+        }
+
+        loadData()
+
+    }, [dispatch, otherExperience.length, employment.length])
+
+
+    if (apiLoading) {
+        return <LoadingBox sx={{...sx }} />
+    }
 
     return (
-        <Fragment>
+        <Box sx={{
+            display: "grid",
+            gridTemplateRows: "repeat(5, max-content)",
+            gridTemplateColumns: "auto",
+            gridGap: 5,
+            ...sx,
+        }}>
+            {role && role === "admin" && (
+                <Box sx={{
+                    gridRow: 1,
+                    display: "flex",
+                    alignItems: "center",
+                }} >
+                    <Button onClick={handleAddEmployment} startIcon={<Add />}>
+                        {t("addExperience")}
+                    </Button>
+                </Box>
+            )}
 
-            {employment && (employment.length > 0) && (
-                <SectionStack title={t("workExperience")}>
-                    {employment.sort((a,b) => {
-                        if (a.startDate > b.startDate) return -1;
-                        else return 1;
-                    }).map(x => (
-                        <EmploymentItem key={x.id} item={x} />
-                    ))}
+            <Typography variant="h4" component="div" sx={{gridRow: 2}}>
+                {t("experience")}
+            </Typography>
+
+            {employment.length === 0 && otherExperience.length === 0 && (
+                <SectionHeader text={t("noExperience")} sx={{gridRow: 3}} />
+            )}
+
+            {employment.length > 0 && (
+                <SectionStack sx={{gridRow: 3}} title={t("employment")}>
+                    {[...employment]
+                        .map(item => (
+                            <div key={item.id}>
+                                {item.employer}
+                            </div>
+                        ))}
                 </SectionStack>
             )}
 
-            {otherExperiences && (otherExperiences.length > 0) && (
-                <SectionStack title={t("other")}>
-                    {otherExperiences.map(x => (
-                        <ExperienceItem key={x.id} item={x} />
-                    ))}
+            {otherExperience.length > 0 && (
+                <SectionStack sx={{gridRow: 4}} title={t("otherExperience")}>
+                    {[...otherExperience]
+                        .map(item => (
+                            <ExperienceItem key={item.id} item={item} />
+                        ))}
                 </SectionStack>
             )}
 
-        </Fragment>
+            <ArrowNavigation sx={{gridRow: 5, mb: 5}}
+                nextPage="skills" prevPage="education" />
+
+        </Box>
     )
-}
+
+} 

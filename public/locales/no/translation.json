@@ -91,5 +91,13 @@
     "close" : "Lukk",
     "editSchool" : "Rediger Skole",
     "editOtherEducation" : "Rediger annen utdanning",
-    "editOtherExperience" : "Rediger annen erfaring"
+    "editOtherExperience" : "Rediger annen erfaring",
+  
+    "employment": "Arbeidserfaring",
+    "addExperience": "Legg til erfaring",
+    "noExperience": "Ingen arbeidserfaringer lagt til...",
+    "addSkill" : "Legg til ferdighet",
+    "noSkills" : "Ingen ferdigheter lagt til...",
+    "addProject" : "Legg til prosjekt",
+    "noProjects" : "Ingen prosjekter lagt til..."
 }

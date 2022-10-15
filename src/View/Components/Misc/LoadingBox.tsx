@@ -6,7 +6,15 @@ interface IProps {
 
 export const LoadingBox = ({sx}: IProps) => {
     return (
-        <Box sx={{...sx}}>
+        <Box sx={{
+            width: "100%",
+            height: 250,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            ...sx,
+
+        }} >
             <CircularProgress thickness={4}/>
         </Box>
     )

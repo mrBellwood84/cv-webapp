@@ -6,8 +6,9 @@ import { experienceAgent } from "../../../Core/ApiAgent/experienceAgent"
 import { schoolAgent } from "../../../Core/ApiAgent/schoolAgent"
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
 import { educationStore } from "../../../Core/Store/Stores/educationStore"
-import { utilStore } from "../../../Core/Store/Stores/utils"
+import { utilStore } from "../../../Core/Store/Stores/utilsStore"
 import { ExperienceItem } from "../Misc/ExperienceItem"
+import { LoadingBox } from "../Misc/LoadingBox"
 import { ArrowNavigation } from "../Navigation/ArrowNavigation"
 import { SectionHeader } from "../_Shared/SectionHeader"
 import { SectionStack } from "../_Shared/SectionStack"
@@ -22,7 +23,7 @@ export const EducationContainer = ({sx}: IProps) => {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
 
-    const [apiLoading, setApiLoading] = useState<boolean>(false)
+    const [apiLoading, setApiLoading] = useState<boolean>(true)
 
     const school = useAppSelector((state) => state.education.schools);
     const otherEduc = useAppSelector((state) => state.education.otherEduc);
@@ -76,7 +77,7 @@ export const EducationContainer = ({sx}: IProps) => {
     }, [dispatch, school.length, otherEduc.length])
 
     if (apiLoading) {
-        return <div>API Loading</div>
+        return <LoadingBox sx={{...sx }} />
     }
 
     return (
@@ -145,7 +146,7 @@ export const EducationContainer = ({sx}: IProps) => {
                 </SectionStack>
             )}
 
-            <ArrowNavigation sx={{gridRow: 5, gridColumn: 1, justifyContent: "center", mb: 5}}
+            <ArrowNavigation sx={{gridRow: 5, mb: 5}}
                 nextPage="experience" prevPage="home" />
         </Box>
     )

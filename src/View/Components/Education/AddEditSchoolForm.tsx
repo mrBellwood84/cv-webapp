@@ -11,7 +11,7 @@ import { FormLanguageToggle } from "../_Shared/FormLanguageToggle"
 import { v4 as guid } from "uuid"
 import { ITextLocale } from "../../../Core/Data/Shared/ITextLocale"
 import { educationStore } from "../../../Core/Store/Stores/educationStore"
-import { utilStore } from "../../../Core/Store/Stores/utils"
+import { utilStore } from "../../../Core/Store/Stores/utilsStore"
 import { Delete } from "@mui/icons-material"
 import { schoolAgent } from "../../../Core/ApiAgent/schoolAgent"
 import { ArrowNavigation } from "../Navigation/ArrowNavigation"
@@ -263,7 +263,7 @@ export const AddEditSchoolForm = ({sx}: IProps) => {
         dispatch(utilStore.actions.setActiveView("education"))
     }
 
-    if (apiLoading) return <LoadingBox />
+    if (apiLoading) return <LoadingBox sx={{...sx}} />
 
     return (
         <Box sx={{

@@ -7,7 +7,7 @@ import { accountAgent } from "../../../Core/ApiAgent/accountAgent";
 import { IAccountManaged } from "../../../Core/Data/Account/IAccountManaged";
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
 import { adminStore } from "../../../Core/Store/Stores/adminStore";
-import { utilStore } from "../../../Core/Store/Stores/utils";
+import { utilStore } from "../../../Core/Store/Stores/utilsStore";
 import { LoadingBox } from "../Misc/LoadingBox";
 import { ArrowNavigation } from "../Navigation/ArrowNavigation";
 import { SectionHeader } from "../_Shared/SectionHeader";
@@ -125,7 +125,7 @@ export const CreateEditUserForm = ({sx}: IProps) => {
         setApiLoading(false)
     }
 
-    if (apiLoading) return <LoadingBox />
+    if (apiLoading) return <LoadingBox sx={{...sx}} />
 
     return (
         <Box sx={{

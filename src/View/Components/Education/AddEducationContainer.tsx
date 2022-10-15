@@ -14,7 +14,6 @@ interface IProps {
 export const AddEducationContainer = ({sx}: IProps) => {
 
     const { t } = useTranslation()
-
     const  [value, setValue] = useState<number>(0);
 
     const handleTabChange = (_event: SyntheticEvent, newValue: number) => {
@@ -45,7 +44,7 @@ export const AddEducationContainer = ({sx}: IProps) => {
                     <AddEditSchoolForm />
                 </TabPanel>
                 <TabPanel index={1} value={value}>
-                    <AddEditExperienceForm datatype="expEduc" />
+                    <AddEditExperienceForm datatype="education" />
                 </TabPanel>
             </Box>
            

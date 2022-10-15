@@ -10,7 +10,7 @@ import { cookeHandler } from "../../../Core/Utils/cookieHandler"
 import { LanguageButton } from "../Misc/LanguageButton"
 import i18n, { supportedLanguages } from "../../../i18n";
 import { useAppDispatch } from "../../../Core/Store/hooks"
-import { utilStore } from "../../../Core/Store/Stores/utils"
+import { utilStore } from "../../../Core/Store/Stores/utilsStore"
 
 
 interface IProps {
@@ -82,7 +82,7 @@ export const Appbar = ({sx}: IProps) => {
                     }}
                     variant="h6" 
                     component="div" 
-                    onClick={() => dispatch(utilStore.actions.setActiveView(""))}>
+                    onClick={() => dispatch(utilStore.actions.setActiveView("home"))}>
                     DEV :: Logo
                 </Typography>
 

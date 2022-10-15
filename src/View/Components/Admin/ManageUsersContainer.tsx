@@ -6,7 +6,7 @@ import { accountAgent } from "../../../Core/ApiAgent/accountAgent";
 import { IAccountManaged } from "../../../Core/Data/Account/IAccountManaged";
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks";
 import { adminStore } from "../../../Core/Store/Stores/adminStore";
-import { utilStore } from "../../../Core/Store/Stores/utils";
+import { utilStore } from "../../../Core/Store/Stores/utilsStore";
 import { LoadingBox } from "../Misc/LoadingBox";
 import { ArrowNavigation } from "../Navigation/ArrowNavigation";
 import { SectionStack } from "../_Shared/SectionStack";
@@ -131,7 +131,7 @@ export const ManageUsersContainer = ({sx}: IProps) => {
         setApiLoading(false)
     }, [dispatch, allUsers.length])
 
-    if (apiLoading) return <LoadingBox />
+    if (apiLoading) return <LoadingBox sx={{...sx}} />
 
     return (
         <Box sx={{
@@ -147,8 +147,8 @@ export const ManageUsersContainer = ({sx}: IProps) => {
                 justifyContent: "space-between",
             }}>
                 <ArrowNavigation prevPage="home" sx={{gridRow: 1}} />
-                <Button onClick={createUser} startIcon={<Add />} >
-                    {t("createUser")}
+                <Button onClick={createUser} startIcon={<Add />}>
+                        {t("createUser")}
                 </Button>
             </Box>
 
