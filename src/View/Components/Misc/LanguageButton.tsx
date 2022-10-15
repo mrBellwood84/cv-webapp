@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import LanguageIcon from "@mui/icons-material/Language"
 import i18n from "../../../i18n"
 import { useAppDispatch } from "../../../Core/Store/hooks"
-import { utilStore } from "../../../Core/Store/Stores/utils"
+import { utilStore } from "../../../Core/Store/Stores/utilsStore"
 
 export const LanguageButton = () => {
 

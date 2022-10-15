@@ -9,8 +9,11 @@ import { ManageUsersContainer } from "../Admin/ManageUsersContainer"
 import { AddEducationContainer } from "../Education/AddEducationContainer"
 import { AddEditSchoolForm } from "../Education/AddEditSchoolForm"
 import { AddEditExperienceForm } from "../Experience/AddEditExperienceForm"
-import { Fragment } from "react"
 import { CreateEditUserForm } from "../Admin/CreateEditUserForm"
+import { AddEditEmploymentForm } from "../Experience/AddEditEmploymentForm"
+import { AddExperienceContainer } from "../Experience/AddExperienceContainer"
+import { AddEditSkillForm } from "../Skills/AddEditSkillForm"
+import { AddEditProjectForm } from "../Projects/AddEditProjectForm"
 
 interface IProps {
     sx: SxProps;
@@ -22,69 +25,73 @@ export const ContentContainer = ({sx}: IProps) => {
     const isAdmin = useAppSelector((state) => state.account.account?.role) === "admin";
 
     switch(activeView) {
+
         case "education":
-            return (
-                <Fragment>
-                    <EducationContainer sx={{...sx}} />
-                </Fragment>
-            )
+            return <EducationContainer sx={{...sx}} />
+
+        case "experience":
+            return <ExperienceContainer sx={{...sx}} />
+
+        case "skills":
+            return <SkillsContainer sx={{...sx}} />
+
+        case "portfolio":
+            return <ProjectContainer sx={{...sx}} />
+
+
+        case "manageUsers": 
+            return isAdmin ?
+                <ManageUsersContainer sx={{...sx}} /> : 
+                <HomeContainer sx={{...sx}} />
+        
+        case "editUser":
+            return isAdmin ? 
+                <CreateEditUserForm sx={{...sx}} /> :
+                <HomeContainer sx={{...sx}} />
+
 
         case "addEducation":
-            return (
-                <Fragment>
-                    {isAdmin ? <AddEducationContainer sx={{...sx}} /> : <HomeContainer sx={{...sx}} />}
-                </Fragment>
-            )
+            return isAdmin ? 
+                <AddEducationContainer sx={{...sx}} /> :
+                <HomeContainer sx={{...sx}} />
+        
+        case "editSchool": 
+            return isAdmin ? 
+                <AddEditSchoolForm sx={{...sx}} /> : 
+                <HomeContainer sx={{...sx}} />
 
-        case "editSchool":
-            return <Fragment>
-                {isAdmin ? <AddEditSchoolForm sx={{...sx}} /> : <HomeContainer sx={{...sx}} />}
-            </Fragment>
+        case "editEducationExperience":
+            return isAdmin ?
+                <AddEditExperienceForm datatype="education" sx={{...sx}} /> : 
+                <HomeContainer sx={{...sx}} />
 
-        case "editExperience":
-            return <Fragment>
-                {isAdmin ? <AddEditExperienceForm datatype="none" sx={{...sx}}  /> : <HomeContainer sx={{...sx}} />}
-            </Fragment>
-            
-        case "experience":
-            return (
-                <Fragment>
-                    <ExperienceContainer />
-                </Fragment>
-            )
-        case "skills":
-            return (
-                <Fragment>
-                    <SkillsContainer />
-                </Fragment>
-            )
-        case "portfolio":
-            return (
-                <Fragment>
-                    <ProjectContainer />
-                </Fragment>
-            )
-        case "manageUsers":
-            return (
-                <Fragment>
-                    {isAdmin ? <ManageUsersContainer sx={{...sx}} /> : <HomeContainer sx={{...sx}} />}
-                </Fragment>
-            )
 
-        case "editUser":
-            return (
-                <Fragment>
-                    {isAdmin ? <CreateEditUserForm sx={{...sx}} /> : <HomeContainer sx={{...sx}} />}
-                </Fragment>
-            )
+        case "addExperience": 
+            return isAdmin ? 
+                <AddExperienceContainer sx={{...sx}} /> :
+                <HomeContainer sx={{...sx}} />
+
+        case "editEmployment":
+            return isAdmin ? 
+                <AddEditEmploymentForm sx={{...sx}} /> :
+                <HomeContainer sx={{...sx}} />
+
+        case "editOtherExperience":
+            return isAdmin ? 
+                <AddEditExperienceForm datatype="other" sx={{...sx}} /> :
+                <HomeContainer sx={{...sx}} />
+
+        case "addEditSkill":
+            return isAdmin ? 
+                <AddEditSkillForm sx={{...sx}} /> : 
+                <HomeContainer sx={{...sx}} />
+
+        case  "addEditProject": 
+            return isAdmin ? 
+                <AddEditProjectForm sx={{...sx}} /> :
+                <HomeContainer sx={{...sx}} />
 
         default:
-            return (
-                <Fragment>
-                    <HomeContainer sx={{...sx}} />
-                </Fragment>
-                )
-
-
+            return <HomeContainer sx={{...sx}} />
     }
 }

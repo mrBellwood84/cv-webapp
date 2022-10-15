@@ -3,7 +3,7 @@ import { accountAgent } from "./Core/ApiAgent/accountAgent";
 import { IAccount } from "./Core/Data/Account/IAccount";
 import { useAppDispatch, useAppSelector } from "./Core/Store/hooks";
 import { accountStore } from "./Core/Store/Stores/accountStore";
-import { utilStore } from "./Core/Store/Stores/utils";
+import { utilStore } from "./Core/Store/Stores/utilsStore";
 import { cookeHandler } from "./Core/Utils/cookieHandler";
 import i18n from "./i18n";
 import { MainNoUser } from "./View/MainNoUser";

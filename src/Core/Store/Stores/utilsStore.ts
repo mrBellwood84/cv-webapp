@@ -1,14 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
+export type ViewKey = 
+      "home" | "education" | "experience" | "skills" | "portfolio" 
+    | "manageUsers" | "editUser"
+    | "addEducation" | "editSchool" | "editEducationExperience"
+    | "addExperience" | "editEmployment" | "editOtherExperience"
+    | "addEditSkill" | "addEditProject"
+
 interface INavigationState {
-    activeView: string,
+    activeView: ViewKey,
     language: string;
     contentButtonDrawerOpen: boolean;
     showLanguageDialog: boolean;
 }
 
 const initialState: INavigationState = {
-    activeView: "",
+    activeView: "home",
     language: "",
     contentButtonDrawerOpen: false,
     showLanguageDialog: false,
@@ -18,7 +25,7 @@ export const utilStore = createSlice({
     name: "navigation",
     initialState,
     reducers: {
-        setActiveView: (state, action: PayloadAction<string>) => {
+        setActiveView: (state, action: PayloadAction<ViewKey>) => {
             state.activeView = action.payload
         },
         setLanguage: (state, action: PayloadAction<string>) => {

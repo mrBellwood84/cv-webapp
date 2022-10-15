@@ -1,7 +1,7 @@
 import { Dialog, DialogTitle, List, ListItemButton, ListItemText } from "@mui/material"
 import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
-import { utilStore } from "../../../Core/Store/Stores/utils"
+import { utilStore } from "../../../Core/Store/Stores/utilsStore"
 import i18n, { supportedLanguages } from "../../../i18n"
 
 export const LanguageDialog = () => {

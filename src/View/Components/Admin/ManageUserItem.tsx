@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { IAccountManaged } from "../../../Core/Data/Account/IAccountManaged"
 import { useAppDispatch } from "../../../Core/Store/hooks";
 import { adminStore } from "../../../Core/Store/Stores/adminStore";
-import { utilStore } from "../../../Core/Store/Stores/utils";
+import { utilStore } from "../../../Core/Store/Stores/utilsStore";
 
 interface IProps {
     user: IAccountManaged;

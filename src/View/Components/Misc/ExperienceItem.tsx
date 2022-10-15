@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { IExperience } from "../../../Core/Data/Experience/IExperience"
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
 import { educationStore } from "../../../Core/Store/Stores/educationStore"
-import { utilStore } from "../../../Core/Store/Stores/utils"
+import { utilStore } from "../../../Core/Store/Stores/utilsStore"
 import { createYearMonthSpan, createYearMonthString } from "../../../Core/Utils/dateTools"
 
 interface IProps {
@@ -18,9 +18,11 @@ export const ExperienceItem = ({item}: IProps) => {
     const isAdmin = useAppSelector((state) => state.account.account?.role) === "admin";
     const lang = useAppSelector((state) => state.utils.language);
 
+    const viewKey = item.type === "education" ? "editEducationExperience" : "editOtherExperience"
+
     const handleEditClick = () => {
         dispatch(educationStore.actions.setSelectedOther(item))
-        dispatch(utilStore.actions.setActiveView("editExperience"))
+        dispatch(utilStore.actions.setActiveView(viewKey))
     }
 
     return (

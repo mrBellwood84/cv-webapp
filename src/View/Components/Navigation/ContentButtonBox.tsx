@@ -1,7 +1,7 @@
 import { Box, Divider, List, SxProps, Theme } from "@mui/material"
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks";
-import { utilStore } from "../../../Core/Store/Stores/utils";
+import { utilStore, ViewKey } from "../../../Core/Store/Stores/utilsStore";
 import { ContentButton } from "./ContentButton";
 import {
     DataObject,
@@ -26,7 +26,7 @@ export const ContentButtonBox = ({sx}: IProps) => {
 
     const isAdmin = useAppSelector((state) => state.account.account?.role) === "admin";
 
-    const btnClick = (key: string) => {
+    const btnClick = (key: ViewKey) => {
         dispatch(utilStore.actions.setActiveView(key));
     }
 
@@ -39,7 +39,7 @@ export const ContentButtonBox = ({sx}: IProps) => {
                         <Divider />
                     </Fragment>
                 )}
-                <ContentButton text={t("home")} svg={Home} onClick={() => btnClick("")} />
+                <ContentButton text={t("home")} svg={Home} onClick={() => btnClick("home")} />
                 <ContentButton text={t("education")} svg={School} onClick={() => btnClick("education")} />
                 <ContentButton text={t("experience")} svg={Work} onClick={() => btnClick("experience")} />
                 <ContentButton text={t("skills")}  svg={DataObject} onClick={() => btnClick("skills")} />

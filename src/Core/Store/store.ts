@@ -3,7 +3,9 @@ import { accountStore } from "./Stores/accountStore";
 import { adminStore } from "./Stores/adminStore";
 import { educationStore } from "./Stores/educationStore";
 import { employmentStore } from "./Stores/employmentStore";
-import { utilStore } from "./Stores/utils";
+import { portfolioStore } from "./Stores/portfolioStore";
+import { skillStore } from "./Stores/skillsStore";
+import { utilStore } from "./Stores/utilsStore";
 
 const store = configureStore({
     reducer: {
@@ -11,6 +13,8 @@ const store = configureStore({
         admin: adminStore.reducer,
         education: educationStore.reducer,
         employment: employmentStore.reducer,
+        skills: skillStore.reducer,
+        portfolio: portfolioStore.reducer,
         utils: utilStore.reducer,
     }
 })

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { ISchool } from "../../../Core/Data/School/ISchool"
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
 import { educationStore } from "../../../Core/Store/Stores/educationStore"
-import { utilStore } from "../../../Core/Store/Stores/utils"
+import { utilStore } from "../../../Core/Store/Stores/utilsStore"
 import { createYearMonthSpan } from "../../../Core/Utils/dateTools"
 
 interface IProps {

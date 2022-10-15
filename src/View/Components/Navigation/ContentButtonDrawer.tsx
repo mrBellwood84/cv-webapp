@@ -3,7 +3,7 @@ import { Divider, Drawer, List, ListItemButton, ListItemIcon, ListItemText, SxPr
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks";
-import { utilStore } from "../../../Core/Store/Stores/utils";
+import { utilStore, ViewKey } from "../../../Core/Store/Stores/utilsStore";
 import { ContentButton } from "./ContentButton";
 
 interface IProps {
@@ -19,7 +19,7 @@ export const ContentButtonDrawer = ({sx}: IProps) => {
 
     const handleClose = () => dispatch(utilStore.actions.toggleContentButtonDrawer(false));
 
-    const handleButtonClick = (key: string) => {
+    const handleButtonClick = (key: ViewKey) => {
         dispatch(utilStore.actions.setActiveView(key))
         handleClose()
     }
@@ -48,7 +48,7 @@ export const ContentButtonDrawer = ({sx}: IProps) => {
                         <Divider />
                     </Fragment>
                 )}
-                <ContentButton text={t("home")} svg={Home} onClick={() => handleButtonClick("")} />
+                <ContentButton text={t("home")} svg={Home} onClick={() => handleButtonClick("home")} />
                 <ContentButton text={t("education")} svg={School} onClick={() => handleButtonClick("education")} />
                 <ContentButton text={t("experience")} svg={Work} onClick={() => handleButtonClick("experience")} />
                 <ContentButton text={t("skills")}  svg={DataObject} onClick={() => handleButtonClick("skills")} />

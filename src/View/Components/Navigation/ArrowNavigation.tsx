@@ -3,11 +3,11 @@ import { Button, SxProps } from "@mui/material";
 import { Box } from "@mui/system"
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../../Core/Store/hooks";
-import { utilStore } from "../../../Core/Store/Stores/utils";
+import { utilStore, ViewKey } from "../../../Core/Store/Stores/utilsStore";
 
 interface IProps {
-    nextPage?: string;
-    prevPage?: string;
+    nextPage?: ViewKey;
+    prevPage?: ViewKey;
     sx?: SxProps;
 }
 
@@ -16,12 +16,12 @@ export const ArrowNavigation = ({nextPage, prevPage, sx,}: IProps) => {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
 
-    const handleClick = (key: string) => {
+    const handleClick = (key: ViewKey) => {
         dispatch(utilStore.actions.setActiveView(key))
     }
 
     return (
-        <Box sx={{...sx, display: "flex"}}>
+        <Box sx={{...sx, display: "flex", width: "100%", justifyContent: "space-between"}}>
                 {prevPage && (
                     <Button startIcon={<NavigateBefore />} onClick={() => handleClick(prevPage)}>
                         {t(prevPage)}
