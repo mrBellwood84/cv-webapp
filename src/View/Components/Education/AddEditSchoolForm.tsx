@@ -300,7 +300,7 @@ export const AddEditSchoolForm = ({sx}: IProps) => {
                         setLanguage={setLanguageSelect} />
                     
                     {edit && (
-                        <Tooltip title={t("delete")} sx={{ml: "auto"}}>
+                        <Tooltip title={t("deleteDialog")} sx={{ml: "auto"}}>
                             <IconButton onClick={() => setDeleteDialogOpen(true)}>
                                 <Delete color="error" />
                             </IconButton>
