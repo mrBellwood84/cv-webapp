@@ -92,13 +92,25 @@
     "editSchool" : "Rediger Skole",
     "editOtherEducation" : "Rediger annen utdanning",
     "editOtherExperience" : "Rediger annen erfaring",
-  
     "employment": "Arbeidserfaring",
     "addExperience": "Legg til erfaring",
     "otherExperience": "Annen erfaring",
     "noExperience": "Ingen arbeidserfaringer lagt til...",
     "addSkill" : "Legg til ferdighet",
+    "editSkill" : "Rediger ferdighet",
     "noSkills" : "Ingen ferdigheter lagt til...",
     "addProject" : "Legg til prosjekt",
-    "noProjects" : "Ingen prosjekter lagt til..."
+    "editProject" : "Rediger prosjekt",
+    "noProjects" : "Ingen prosjekter lagt til...",
+    "language" : "Språk",
+    "framework" : "Rammeverk",
+    "typeMissingError": "Type mangler",
+    "name" : "Navn",
+    "nameRequired": "Navn påkrevd",
+    "svgUrl" : "Svg Url",
+    "svgUrlRequired" : "Svg Url mangler",
+    "norwegianText" : "Norsk tekst",
+    "englishText" : "Engelsk tekst",
+    "linkSourceText" : "Hent svg url fra",
+    "noLogoFound" : "Ingen logo"
 }

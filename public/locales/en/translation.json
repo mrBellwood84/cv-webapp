@@ -93,13 +93,25 @@
     "editSchool" : "Edit school",
     "editOtherEducation" : "Edit other education",
     "editOtherExperience" : "Edit other experience",
-
     "employment": "Work experience",
     "addExperience": "Add work experience",
     "otherExperience": "Other experience",
     "noExperience": "No work experience added...",
     "addSkill" : "Add skill",
+    "editSkill" : "Edit skill",
     "noSkills" : "No skills added...",
     "addProject" : "Add project",
-    "noProjects" : "No projects added..."
+    "editProject" : "Edit project",
+    "noProjects" : "No projects added...",
+    "language": "Language",
+    "framework" : "Framework",
+    "typeMissingError": "Type missing",
+    "name" : "Name",
+    "nameRequired": "Navn required",
+    "svgUrl" : "Svg Url",
+    "svgUrlRequired" : "Svg Url missing",
+    "norwegianText" : "Norwegian text",
+    "englishText" : "English text",
+    "linkSourceText" : "Get svg urls from",
+    "noLogoFound" : "No logo"
 }

@@ -10,6 +10,7 @@ import { LoadingBox } from "../Misc/LoadingBox"
 import { ArrowNavigation } from "../Navigation/ArrowNavigation"
 import { SectionHeader } from "../_Shared/SectionHeader"
 import { SectionStack } from "../_Shared/SectionStack"
+import { SkillItem } from "./SkillItem"
 import { SkillRatingExplained } from "./SkillRatingExplained"
 
 interface IProps {
@@ -23,11 +24,10 @@ export const SkillsContainer = ({sx}: IProps) => {
 
     const [apiLoading, setApiLoading] = useState<boolean>(false);
 
-    const skills = useAppSelector((state) => state.skills.skills);
+    const skills     = useAppSelector((state) => state.skills.skills)
+    const languages  = useAppSelector((state) => state.skills.skills).filter(s => s.type === "language")
+    const frameworks = useAppSelector((state) => state.skills.skills).filter(s => s.type === "framework")
     const role = useAppSelector((state) => state.account.account?.role);
-
-    const languages = skills.filter(s => s.type === "language")
-    const frameworks = skills.filter(s => s.type === "frameworks")
 
     const handleAddSkill = () => {
         dispatch(skillStore.actions.clearSelected())
@@ -98,7 +98,7 @@ export const SkillsContainer = ({sx}: IProps) => {
                             return -1;
                         })
                         .map(i => (
-                            <div>language</div>
+                            <SkillItem key={i.id} item={i} />
                         ))}
                 </SectionStack>
             )}
@@ -111,21 +111,20 @@ export const SkillsContainer = ({sx}: IProps) => {
                             return -1;
                         })
                         .map(i => (
-                            <div>frameworks</div>
+                            <SkillItem key={i.id} item={i} />
                         ))}
                 </SectionStack>
             )}
 
-            <ArrowNavigation sx={{gridRow: 5, mb: 5}}
-                nextPage="portfolio" prevPage="experience" />
-
             {skills.length > 0 && (
-                <Box sx={{gridRow: 6}}>
+                <Box sx={{gridRow: 5}}>
                     <Divider sx={{mt: 2}} />
                     <SkillRatingExplained />
                 </Box>
             )}
 
+            <ArrowNavigation sx={{gridRow: 6, mb: 5}}
+                nextPage="portfolio" prevPage="experience" />
 
         </Box>
     )
