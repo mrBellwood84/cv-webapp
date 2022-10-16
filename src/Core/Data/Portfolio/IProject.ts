@@ -1,5 +1,5 @@
 import { ITextLocale } from "../Shared/ITextLocale";
-import { ISkill } from "../Skills/ISkill";
+import { ISkillShort } from "../Skills/ISkillShort";
 
 /** model for projects in portfolio */
 export interface IProject {
@@ -8,9 +8,9 @@ export interface IProject {
     /** name of project */
     name: string;
     /** list of languages */
-    languages: ISkill[];
+    languages: ISkillShort[];
     /** list of frameworks */
-    frameworks: ISkill[];
+    frameworks: ISkillShort[];
     /** content text describing project */
     text: ITextLocale[];
     /** url to website if any */

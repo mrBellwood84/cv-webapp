@@ -1,9 +1,11 @@
 import { Edit } from "@mui/icons-material"
 import { Box, IconButton, Tooltip, Typography } from "@mui/material"
 import { useTranslation } from "react-i18next"
+import { isThrowStatement } from "typescript"
 import { IExperience } from "../../../Core/Data/Experience/IExperience"
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
 import { educationStore } from "../../../Core/Store/Stores/educationStore"
+import { employmentStore } from "../../../Core/Store/Stores/employmentStore"
 import { utilStore } from "../../../Core/Store/Stores/utilsStore"
 import { createYearMonthSpan, createYearMonthString } from "../../../Core/Utils/dateTools"
 
@@ -21,7 +23,8 @@ export const ExperienceItem = ({item}: IProps) => {
     const viewKey = item.type === "education" ? "editEducationExperience" : "editOtherExperience"
 
     const handleEditClick = () => {
-        dispatch(educationStore.actions.setSelectedOther(item))
+        if (item.type === "education") dispatch(educationStore.actions.setSelectedOther(item))
+        if (item.type === "other") dispatch(employmentStore.actions.setSelectedOtherExperience(item))
         dispatch(utilStore.actions.setActiveView(viewKey))
     }
 

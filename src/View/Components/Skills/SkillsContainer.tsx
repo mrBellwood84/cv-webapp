@@ -3,7 +3,6 @@ import { Box, Button, Divider, SxProps, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { skillAgent } from "../../../Core/ApiAgent/skillAgent"
-import { ISkill } from "../../../Core/Data/Skills/ISkill"
 import { useAppDispatch, useAppSelector } from "../../../Core/Store/hooks"
 import { skillStore } from "../../../Core/Store/Stores/skillsStore"
 import { utilStore } from "../../../Core/Store/Stores/utilsStore"
@@ -11,7 +10,6 @@ import { LoadingBox } from "../Misc/LoadingBox"
 import { ArrowNavigation } from "../Navigation/ArrowNavigation"
 import { SectionHeader } from "../_Shared/SectionHeader"
 import { SectionStack } from "../_Shared/SectionStack"
-import { SkillItem } from "./SkillItem"
 import { SkillRatingExplained } from "./SkillRatingExplained"
 
 interface IProps {
@@ -56,6 +54,9 @@ export const SkillsContainer = ({sx}: IProps) => {
             await loadSkillData()
             setApiLoading(false);
         }
+
+        loadData()
+        
     },[ dispatch, skills.length ])
 
     if (apiLoading) return <LoadingBox sx={{...sx}} />
