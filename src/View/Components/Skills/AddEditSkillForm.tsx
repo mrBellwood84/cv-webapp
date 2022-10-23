@@ -238,11 +238,13 @@ export const AddEditSkillForm = ({sx}: IProps) => {
                             <FormControlLabel value="language" control={<Radio />} label={t("language")} labelPlacement="start" />
                             <FormControlLabel value="framework" control={<Radio />} label={t("framework")} labelPlacement="start" />
                         </RadioGroup>
-                        <Tooltip title={t("deleteDialog")}>
-                            <IconButton onClick={() => setDeleteDialogOpen(true)}>
-                                <Delete color="error" />
-                            </IconButton>
-                        </Tooltip>
+                        { selected && (
+                            <Tooltip title={t("deleteDialog")}>
+                                <IconButton onClick={() => setDeleteDialogOpen(true)}>
+                                    <Delete color="error" />
+                                </IconButton>
+                            </Tooltip> 
+                        )}
                     </Box>
 
                     <TextField 
