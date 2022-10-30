@@ -147,7 +147,6 @@ export const AddEditSkillForm = ({sx}: IProps) => {
             console.error("DEV :: something went wrong", response )
             return
         }
-        console.log(response)
         dispatch(skillStore.actions.addSkill(response))
         dispatch(utilStore.actions.setActiveView("skills"))
     }
