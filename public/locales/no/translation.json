@@ -112,5 +112,12 @@
     "norwegianText" : "Norsk tekst",
     "englishText" : "Engelsk tekst",
     "linkSourceText" : "Hent svg url fra",
-    "noLogoFound" : "Ingen logo"
+    "noLogoFound" : "Ingen logo",
+    "createProject": "Opprett prosjekt",
+    "updateProject" : "Oppdater prosjekt",
+    "websiteUrl" : "Nettside",
+    "repoUrl" : "Kildekode",
+    "addLanguage": "Legg til språk",
+    "addFramework" : "Legg til rammeverk",
+    "remove" : "Fjern"
 }

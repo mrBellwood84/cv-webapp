@@ -6,7 +6,7 @@ export interface IProject {
     /** entity id */
     id: string;
     /** name of project */
-    name: string;
+    projectName: string;
     /** list of languages */
     languages: ISkillShort[];
     /** list of frameworks */
@@ -14,7 +14,7 @@ export interface IProject {
     /** content text describing project */
     text: ITextLocale[];
     /** url to website if any */
-    linkWebsiteUrl?: string;
+    websiteUrl?: string;
     /** link to repo if any */
-    linkRepoUrl?: string;
+    repoUrl?: string;
 }

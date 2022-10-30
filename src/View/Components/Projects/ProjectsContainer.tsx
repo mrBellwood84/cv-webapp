@@ -10,6 +10,7 @@ import { LoadingBox } from "../Misc/LoadingBox"
 import { ArrowNavigation } from "../Navigation/ArrowNavigation"
 import { SectionHeader } from "../_Shared/SectionHeader"
 import { SectionStack } from "../_Shared/SectionStack"
+import { ProjectItem } from "./ProjectItem"
 
 interface IProps {
     sx?: SxProps;
@@ -87,10 +88,10 @@ export const ProjectContainer = ({ sx }: IProps) => {
             )}
 
             {project.length > 0 && (
-                <SectionStack title={t("framwwork")} sx={{gridRow: 3}}>
+                <SectionStack title={t("framework")} sx={{gridRow: 3}}>
                     {[...project]
                     .map(item => (
-                        <div>project</div>
+                        <ProjectItem key={item.id} item={item} />
                     ))}
                 </SectionStack>
             )}

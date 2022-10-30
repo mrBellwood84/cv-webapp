@@ -113,5 +113,12 @@
     "norwegianText" : "Norwegian text",
     "englishText" : "English text",
     "linkSourceText" : "Get svg urls from",
-    "noLogoFound" : "No logo"
+    "noLogoFound" : "No logo",
+    "createProject": "Create project",
+    "updateProject" : "Update project",
+    "websiteUrl" : "Website",
+    "repoUrl" : "Source Code",
+    "addLanguage": "Add language",
+    "addFramework" : "Add framework",
+    "remove" : "Remove"
 }
