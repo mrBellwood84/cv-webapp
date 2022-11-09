@@ -3,7 +3,7 @@ import { SyntheticEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowNavigation } from "../Navigation/ArrowNavigation";
 import { TabPanel } from "../_Shared/TabPanel";
-import { AddEditEmploymentForm } from "./AddEditEmploymentForm";
+import { AddEditEmploymentForm } from "./EmploymentFormComponents/AddEditEmploymentForm";
 import { AddEditExperienceForm } from "./AddEditExperienceForm";
 
 interface IProps {

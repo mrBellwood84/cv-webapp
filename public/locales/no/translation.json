@@ -119,5 +119,22 @@
     "repoUrl" : "Kildekode",
     "addLanguage": "Legg til språk",
     "addFramework" : "Legg til rammeverk",
-    "remove" : "Fjern"
+    "remove" : "Fjern",
+    "createEmployment" : "Opprett arbeidserfaring",
+    "editEmployment" : "Rediger arbeidserfaring",
+    "employerName" : "Arbeidsgiver",
+    "employerRequired" : "Arbeidsgiver mangler...",
+    "ended" : "Avsluttet",
+    "addPosition" : "Legg til stilling",
+    "editPosition" : "Rediger stilling",
+    "titleNO" : "Tittel norsk",
+    "titleEN" : "Tittel engelsk",
+    "titleMissing" : "Tittel mangler",
+    "positionDescriptionNO" : "Kort beskrivelse norsk",
+    "positionDescriptionEN" : "Kort beskrivelse engelsk",
+    "addReference" : "Legg til referanse",
+    "editReference" : "Rediger referanse",
+    "phonenumber" : "Telefonnummer",
+    "phonenumberShort" : "Tlf",
+    "delete" : "Slett"
 }

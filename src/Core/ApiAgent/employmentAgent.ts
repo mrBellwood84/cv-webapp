@@ -23,7 +23,13 @@ export const employmentAgent = {
     },
     updateSingle: async (data: IEmployment) => {
         try {
+            console.warn("updating data")
             const response = await _rootAgent.put("employment", data);
+            console.warn("response recived", response.status, response.statusText);
+
+            const body = await response.json()
+            console.warn("Body: \n", body);
+
             if (!response.ok) return response.status;
             return await response.json()
         } catch {

@@ -1,6 +1,6 @@
 import { ITextLocale } from "../Shared/ITextLocale";
 
-export type ExperienceType = "education" | "employment" | "other"
+export type ExperienceType = "education" | "position" | "other"
 
 /** Model for experience. Shared by several entities.*/
 export interface IExperience {

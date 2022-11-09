@@ -120,5 +120,22 @@
     "repoUrl" : "Source Code",
     "addLanguage": "Add language",
     "addFramework" : "Add framework",
-    "remove" : "Remove"
+    "remove" : "Remove",
+    "createEmployment" : "Create work experience",
+    "editEmployment" : "Edit work experience",
+    "employerName" : "Employer",
+    "employerRequired" : "Employer missing",
+    "ended" : "Ended",
+    "addPosition" : "Add position",
+    "editPosition" : "Edit position",
+    "titleNO" : "Title norwegian",
+    "titleEN" : "Title english",
+    "titleMissing" : "Title missing",
+    "positionDescriptionNO" : "Short description norwegian",
+    "positionDescriptionEN" : "Short description english",
+    "addReference" : "Add reference",
+    "editReference" : "Edit reference",
+    "phonenumber" : "Phonenumber",
+    "phonenumberShort" : "Phone",
+    "delete" : "Delete"
 }

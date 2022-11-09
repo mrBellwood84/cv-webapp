@@ -12,6 +12,7 @@ import { SectionStack } from "../_Shared/SectionStack"
 import { ExperienceItem } from "../Misc/ExperienceItem"
 import { ArrowNavigation } from "../Navigation/ArrowNavigation"
 import { utilStore } from "../../../Core/Store/Stores/utilsStore"
+import { EmploymentItem } from "./EmploymentViewComponents/EmploymentItem"
 
 
 interface IProps {
@@ -113,9 +114,7 @@ export const ExperienceContainer = ({sx}: IProps) => {
                 <SectionStack sx={{gridRow: 3}} title={t("employment")}>
                     {[...employment]
                         .map(item => (
-                            <div key={item.id}>
-                                {item.employer}
-                            </div>
+                            <EmploymentItem key={item.id} item={item} />
                         ))}
                 </SectionStack>
             )}

@@ -8,9 +8,9 @@ export interface IEmployment {
     /** name of employer / company */
     employer: string;
     /** start date of employment */
-    startDate: Date;
+    startDate: string;
     /** end date of employment */
-    endDate?: Date;
+    endDate?: string;
     /** positions in company listed as IExperience data objects */
     positions: IExperience[];
     /** references from job */
