@@ -1,11 +1,12 @@
 import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import { Avatar, Box, Button, IconButton, InputAdornment, SxProps, TextField, Typography } from "@mui/material"
-import { useState } from "react";
+import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { accountAgent } from "../../../Core/ApiAgent/accountAgent";
 import { IAccount } from "../../../Core/Data/Account/IAccount";
+import { ISignInDto } from "../../../Core/Data/Account/ISignInDto";
 import { accountStore } from "../../../Core/Store/Stores/accountStore";
 import { cookeHandler } from "../../../Core/Utils/cookieHandler";
 import { LoadingBox } from "../Misc/LoadingBox";
@@ -14,22 +15,17 @@ interface IProps {
     sx?: SxProps;
 }
 
-type FormValues = {
-    userName: string;
-    password: string;
-}
-
 export const LoginBox = ({sx}:IProps) => {
 
     const { t } = useTranslation()
     const dispatch = useDispatch()
-    const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<ISignInDto>();
 
     const [signInError, setSignInError] = useState<string | undefined>(undefined);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [apiLoading, setApiLoading] = useState<boolean>(false);
 
-    const submit: SubmitHandler<FormValues> = async (data) => {
+    const submit: SubmitHandler<ISignInDto> = async (data) => {
         
         setApiLoading(true)
         setSignInError(undefined)
@@ -93,7 +89,6 @@ export const LoginBox = ({sx}:IProps) => {
             </Typography>
 
             <TextField 
-                id="username-field" 
                 variant="standard"
                 type="text"
                 autoFocus
@@ -107,18 +102,17 @@ export const LoginBox = ({sx}:IProps) => {
                 helperText={errors.userName && t(errors.userName.message!)}
                 fullWidth
                 margin="normal"
-                />
+                /> 
 
-            <TextField 
-                id="password-field" 
+            <TextField  
+                id="password-field"
                 variant="standard"
-                type= {showPassword ? "text" : "password"}
+                type={showPassword ? "text" : "password"}
                 autoCorrect="off"
                 autoComplete="off"
                 label={t("password")}
-                {...register("password", {
-                    required: "passwordRequired"
-                })}
+
+                {...register("password", {required: "passwordRequired"})}
                 error={errors.password !== undefined}
                 helperText={errors.password && t(errors.password.message!)}
                 fullWidth

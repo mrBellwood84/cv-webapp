@@ -10,7 +10,7 @@ export const MainNoUser = () => {
             minHeight: "100vh",
             width: "100vw",
             display: "grid",
-            gridTemplateRows: "max-content 5% max-content auto",
+            gridTemplateRows: "max-content 10% max-content auto",
             gridTemplateColumns: "auto max-content auto"
         }}>
             <AppBar sx={{
@@ -25,7 +25,12 @@ export const MainNoUser = () => {
                 </Toolbar>
             </AppBar>
 
-            <LoginBox sx={{gridRow: 3, gridColumn: 2}} />
+            <LoginBox sx={{
+                gridRow: 3, gridColumn: 2,
+                p: 5, pb: 10,
+                border: "1px solid lightgray",
+                borderRadius: 10
+            }} />
 
 
             <LanguageDialog />
