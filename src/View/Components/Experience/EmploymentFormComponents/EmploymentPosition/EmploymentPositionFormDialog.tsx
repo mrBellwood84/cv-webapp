@@ -28,7 +28,7 @@ const mapToFormData = (item: IExperience): FormData => {
 const mapToDbData = (data: FormData, original?: IExperience): IExperience => {
     return {
         id: original ? original.id : guid(),
-        type: "position",
+        type: "employment",
         startDate: data.startDate ? data.startDate : undefined,
         endDate: Boolean(data.endDate) ? data.endDate : undefined,
         header: [
@@ -71,8 +71,10 @@ export const EmploymentPositionFormDialog = ({isOpen, handleClose, item, handleD
 
     const { t } = useTranslation()
 
+    const defaultValues = item ? mapToFormData(item) : undefined;
+
     const {
-        register, reset, handleSubmit, formState: { errors }
+        register, reset, handleSubmit, watch, formState: { errors }
     } = useForm<FormData>({
         defaultValues: item ? mapToFormData(item) : undefined,
     })

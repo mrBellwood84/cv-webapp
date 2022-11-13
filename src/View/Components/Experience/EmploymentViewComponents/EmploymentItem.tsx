@@ -51,10 +51,7 @@ export const EmploymentItem = ({item}: IProps) => {
             </Typography>
 
             {item.positions &&  (<Box sx={{ gridRow: 2, gridColumn: "1 / 3" }}>
-                {item.positions.sort((a,b) => {
-                    if (a.startDate! < b.startDate!) return -1;
-                    return 1
-                }).map(item => (
+                {item.positions.map(item => (
                     <EmploymentPositionItem key={item.id} item={item} />
                 ))}
             </Box>)}
